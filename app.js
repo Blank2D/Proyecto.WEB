@@ -33,12 +33,12 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, 'pagina_principal')));
 
 //Recibo los valores y los envio a la tabla
-app.post('/guardar_pelicula',(req, res) => {
-    const { nombre, descripcion, fecha, categoria, precio } = req.body;
-    const sql = 'INSERT INTO Peliculas (nombre, descripcion, fecha, categoria, precio) VALUES (?, ?, ?, ?, ?)';
-    connection.query(sql, [nombre, descripcion, fecha, categoria, precio], (err, result) => {
+app.post('/guardar_producto',(req, res) => {
+    const { nombre, descripcion, categoria, precio } = req.body;
+    const sql = 'INSERT INTO Productos (nombre, descripcion, categoria, precio) VALUES (?, ?, ?, ?)';
+    connection.query(sql, [nombre, descripcion, categoria, precio], (err, result) => {
         if (err) throw err;
-        console.log('Película insertada correctamente.');
+        console.log('Producto insertado correctamente.');
         res.redirect('/');
     });
 });
