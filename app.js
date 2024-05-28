@@ -2,7 +2,7 @@
 const express = require('express');
 //Libreria Path
 const path = require('path');
-//Libreria Mysql
+//Libreria      
 const mysql = require('mysql');
 
 const app = express();
@@ -10,10 +10,10 @@ const port = 3000;
 
 // Configurar la conexión a la base de datos
 const connection = mysql.createConnection({
-    host: '10.0.6.39',
-    user: 'estudiante',
-    password: 'Info-2023',
-    database: ''
+    host: '127.0.0.1',
+    user: 'root',
+    password: '1234',
+    database: 'VentasDB'
 });
 
 //Verificacion de errores para validar si la conexion es correcta
@@ -30,15 +30,15 @@ app.use(express.urlencoded({ extended: true }));
 //Convierto en formato json
 app.use(express.json());
 //Configuro para que la aplicacon inicie desde el director o carpeta pagina principal
-app.use(express.static(path.join(__dirname, 'pages')));
+app.use(express.static(path.join(__dirname, 'pagina_principal')));
 
 //Recibo los valores y los envio a la tabla
-app.post('/guardar_producto',(req, res) => {
-    const { nombre, descripcion, categoria, precio } = req.body;
-    const sql = 'INSERT INTO Productos (nombre, descripcion, categoria, precio) VALUES (?, ?, ?, ?)';
-    connection.query(sql, [nombre, descripcion, categoria, precio], (err, result) => {
+app.post('/guardar_pelicula',(req, res) => {
+    const { nombre, descripcion, fecha, categoria, precio } = req.body;
+    const sql = 'INSERT INTO Peliculas (nombre, descripcion, fecha, categoria, precio) VALUES (?, ?, ?, ?, ?)';
+    connection.query(sql, [nombre, descripcion, fecha, categoria, precio], (err, result) => {
         if (err) throw err;
-        console.log('Producto insertado correctamente.');
+        console.log('Película insertada correctamente.');
         res.redirect('/');
     });
 });
@@ -92,12 +92,10 @@ app.post('/modificar_pelicula', (req, res) => {
     });
 });
 
-// Ruta para obtener los datos de una película por su ID
-app.get('/peliculas/:id', (req, res) => {
-    // Extraer el ID de los parámetros de la solicitud
-    const id = req.params.id;
-    // Ejecutar una consulta SQL para obtener los datos de la película con el ID proporcionado
-    connection.query('SELECT * FROM Peliculas WHERE id = ?', [id], (err, result) => {
+app.post('/guardar_producto',(req, res) => {
+    const { nombre, descripcion, categoria, precio } = req.body;
+    const sql = 'INSERT INTO Productos (nombre, descripcion, categoria, precio) VALUES (?, ?, ?, ?)';
+    connection.query(sql, [nombre, descripcion, categoria, precio], (err, result) => {
         if (err) {
             // Manejar el error si ocurre durante la consulta
             console.error('Error al obtener los datos de la película:', err);
