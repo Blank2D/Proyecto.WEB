@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/estilotabla.css">
+    <title>Document</title>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="listarCRUD.html">Listar Productos</a></li>
+        </ul>
+    </nav>
+    <h2>Productos</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Categoría</th>
+                <th>Precio</th>
+                <th>Acciones</th> <!-- Nueva columna para las acciones -->
+            </tr>
+        </thead>
+        <tbody id="productos-list"></tbody>
+    </table>
+
+    <script>
+        // Función para cargar los productos al cargar la página
+        window.onload = function () {
+            // Realizar una solicitud GET a la ruta /peliculas
+            fetch('/productos')
+            // Procesar la respuesta como JSON
+            .then(function(response) {
+                return response.json();
+            })
+            // Cuando se obtienen los datos JSON
+            .then(function(data) {
+                // Obtener una referencia al elemento HTML con el ID 'productos-list'
+                var productosList = document.getElementById('productos-list');
+                // Iterar sobre cada película en los datos recibidos
+                data.forEach(function(productos) {
+                    // Crear una nueva fila de tabla
+                    var row = document.createElement('tr');
+                    // Establecer el contenido HTML de la fila con los datos del producto
+                    row.innerHTML = '<td>' + producto.nombre + '</td>' +
+                                    '<td>' + producto.descripcion + '</td>' +
+                                    '<td>' + new Date(producto.fecha).toLocaleDateString() + '</td>' +
+                                    '<td>' + producto.categoria + '</td>' +
+                                    '<td>' + producto.precio + '</td>' +
+                                    '<td>' +
+                                        '<button onclick="eliminarProducto(' + producto.id + ')">Eliminar</button>' +
+                                        '<button onclick="modificarProducto(' + producto.id + ')">Modificar</button>' +
+                                    '</td>';
+                    // Agregar la fila a la lista de productos
+                    productosList.appendChild(row);
+                });
+            });
+        };
+    </script>
+
+
+    <script>
+        
+        // Función para eliminar un producto
+        function eliminarProducto(id) {
+            fetch('/eliminar_producto/' + id, {
+                method: 'DELETE'
+            })
+            .then(function(response) {
+                if (response.ok) {
+                    console.log('Producto eliminado correctamente.');
+                    // Actualizar la tabla después de eliminar el producto
+                    window.location.reload();
+                } else {
+                    console.error('Error al eliminar producto.');
+                }
+            })
+            .catch(function(error) {
+                console.error('Error en la solicitud:', error);
+            });
+        }
+    
+    </script>
+
+    <script>
+        // Función para modificar un producto
+        function modificarProducto(id) {
+            // Redirigir a la página de modificación de producto con el ID correspondiente
+            window.location.href = '/modificar_producto.html?id=' + id;
+        }
+    </script>
+</body>
+</html>

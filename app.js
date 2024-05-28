@@ -44,7 +44,7 @@ app.post('/guardar_producto',(req, res) => {
 });
 
 //Ruta para mostrar las películas en el listardatos.html con metodo GET
-app.get('/peliculas', (req, res) => {
+app.get('/productos', (req, res) => {
     //Realiza una consulta SQL para seleccionar todas las filas de la tabla "peliculas"
     connection.query('SELECT * FROM Peliculas', (err, rows) => {
         //Maneja los errores, si los hay

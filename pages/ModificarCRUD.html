@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Metadatos del documento -->
+    <meta charset="UTF-8"> <!-- Define la codificación de caracteres como UTF-8 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Configura la vista del documento para que sea adecuada para todos los dispositivos, asegurando la correcta visualización en móviles -->
+    <link rel="stylesheet" href="css/estiloformulario.css"> <!-- Vincula el archivo de estilos CSS externo para estilizar el formulario -->
+    <title>Modificar Película</title> <!-- Título de la página que aparece en la pestaña del navegador -->
+</head>
+
+
+<body>
+    <h2>Modificar Producto</h2> <!-- Encabezado principal de la página -->
+    <form id="modificar-form" action="/modificar_producto" method="POST"> <!-- Formulario para modificar una película, que envía los datos mediante el método POST a la ruta /modificar_pelicula -->
+        <input type="hidden" id="producto-id" name="id"> <!-- Campo oculto para almacenar el ID de la película -->
+        <div>
+            <label for="nombre">Nombre:</label> <!-- Etiqueta para el campo de nombre -->
+            <input type="text" id="nombre" name="nombre" required> <!-- Campo de entrada de texto para el nombre de la película, obligatorio -->
+        </div>
+        <div>
+            <label for="descripcion">Descripción:</label> <!-- Etiqueta para el campo de descripción -->
+            <input type="text" id="descripcion" name="descripcion" required> <!-- Campo de entrada de texto para la descripción de la película, obligatorio -->
+        </div>
+        <div>
+            <label for="categoria">Categoria:</label> <!-- Etiqueta para el campo de categoría -->
+            <select id="categoria" name="categoria" required>
+                <option value="" disabled selected>Selecciona una categoría</option>
+                <option value="cosplay">Cosplay</option>
+                <option value="figura">Figura</option>
+                <option value="hogar">Hogar</option>
+            </select>
+        </div>
+        <div>
+            <label for="precio">Precio:</label> <!-- Etiqueta para el campo de precio de entrada -->
+            <input type="number" id="precio" name="precio" required><br> <!-- Campo de entrada numérica para el precio de entrada, obligatorio -->
+        </div>
+        <button type="submit">Guardar Cambios</button> <!-- Botón para enviar el formulario -->
+    </form>
+
+    <script>
+        // Obtener el ID de la película de la URL
+        const urlParams = new URLSearchParams(window.location.search); // Crea un objeto URLSearchParams para trabajar con los parámetros de la URL
+        const peliculaId = urlParams.get('id'); // Obtiene el valor del parámetro 'id' de la URL
+        // Obtener el formulario y los campos
+        const modificarForm = document.getElementById('modificar-form'); // Obtiene el formulario por su ID
+        const idInput = document.getElementById('producto-id'); // Obtiene el campo oculto de ID
+        const nombreInput = document.getElementById('nombre'); // Obtiene el campo de nombre
+        const descripcionInput = document.getElementById('descripcion'); // Obtiene el campo de descripción
+        const categoriaInput = document.getElementById('categoria'); // Obtiene el campo de categoría
+        const precioInput = document.getElementById('precio'); // Obtiene el campo de precio
+
+        // Rellenar el formulario con los datos de la película correspondiente
+        fetch('/productos/' + productoId) // Realiza una solicitud para obtener los datos de la película con el ID especificado
+            .then(response => response.json()) // Convierte la respuesta en un objeto JSON
+            .then(producto => {
+                // Asigna los datos obtenidos a los campos del formulario
+                idInput.value = producto.id;
+                nombreInput.value = producto.nombre;
+                descripcionInput.value = producto.descripcion;
+                categoriaInput.value = producto.categoria;
+                precioInput.value = producto.precio;
+            })
+   // Muestra un error en la consola si la solicitud falla
+    </script>
+</body>
+</html>
