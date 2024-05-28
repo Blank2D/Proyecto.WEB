@@ -1,0 +1,74 @@
+-- Crear la base de datos
+CREATE DATABASE IF NOT EXISTS VentasDB;
+USE VentasDB;
+
+-- Crear la tabla Categoria
+CREATE TABLE Categoria (
+    IdCategoria INT AUTO_INCREMENT PRIMARY KEY,
+    NombreCategoria VARCHAR(100),
+    DescripcionCategoria TEXT,
+    Estado BIT
+);
+
+-- Crear la tabla Roles
+CREATE TABLE Roles (
+    IdRol INT AUTO_INCREMENT PRIMARY KEY,
+    NombreRol VARCHAR(100),
+    DescripcionRol VARCHAR(100),
+    Activo BIT
+);
+
+-- Crear la tabla Usuarios
+CREATE TABLE Usuarios (
+    IdUsuario INT AUTO_INCREMENT PRIMARY KEY,
+    NombreUsuario VARCHAR(100),
+    CorreoUsuario VARCHAR(100),
+    ContrasenaUsuario VARCHAR(50),
+    ValidacionContrasena VARCHAR(50),
+    Activo BIT,    
+    IdRol INT,
+    FOREIGN KEY (IdRol) REFERENCES Roles(IdRol)
+
+);
+
+-- Crear la tabla Productos
+CREATE TABLE Productos (
+    IdProducto INT AUTO_INCREMENT PRIMARY KEY,
+    NombreProducto VARCHAR(100),
+    DescripcionProducto TEXT,
+    StockProducto INT,
+    PrecioProducto FLOAT,
+    ImagenProducto BLOB,
+    IdCategoria INT,
+    FOREIGN KEY (IdCategoria) REFERENCES Categoria(IdCategoria)
+);
+
+-- Crear la tabla Venta
+CREATE TABLE Venta (
+    IdVenta INT AUTO_INCREMENT PRIMARY KEY,
+    TipoComprobante VARCHAR(20),
+    DescripcionProducto TEXT,
+    Fecha DATETIME,
+    Cantidad INT,
+    IVA FLOAT,
+    Total FLOAT,
+    IdProducto INT,
+    IdUsuario INT,
+    FOREIGN KEY (IdProducto) REFERENCES Productos(IdProducto),
+    FOREIGN KEY (IdUsuario) REFERENCES Usuarios(IdUsuario)
+);
+
+-- Insertar datos en la tabla Categoria
+INSERT INTO Categoria (NombreCategoria, DescripcionCategoria, Estado) VALUES
+('Cosplay', 'Props y accesorios de cosplay', 1),
+('Figuras', 'Figuras relacionadas a videojuegos / series', 1),
+('Hogar', 'Artículos para el hogar y decoración', 1);
+
+-- Insertar datos en la tabla Roles
+INSERT INTO Roles (NombreRol, DescripcionRol, Activo) VALUES
+('Cliente', 'Usuario con permisos de cliente', 1),
+('Administrador', 'Usuario con permisos de administrador', 1);
+
+-- Insertar datos en la tabla Usuarios
+INSERT INTO Usuarios (NombreUsuario, CorreoUsuario, ContrasenaUsuario, ValidacionContrasena, Activo, IdRol) VALUES
+('Cristobal', 'cristobal@gmail.com', 'cristobal1234', 'cristobal1234', 1 ,2);
