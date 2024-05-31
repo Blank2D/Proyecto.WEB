@@ -43,6 +43,18 @@ app.post('/guardar_producto',(req, res) => {
     });
 });
 
+//Recibo los valores y los envio a la tabla
+app.post('/guardar_usuario',(req, res) => {
+    const { NombreUsuario, CorreoUsuario, ContrasenaUsuario, ValidacionContrasena, NombreRol } = req.body;
+    const sql = 'INSERT INTO Usuarios (NombreUsuario, CorreoUsuario, ContrasenaUsuario, ValidacionContrasena, NombreRol) VALUES (?, ?, ?, ?, ?)';
+    connection.query(sql, [NombreUsuario, CorreoUsuario, ContrasenaUsuario, ValidacionContrasena, NombreRol], (err, result) => {
+        if (err) throw err;
+        console.log('Usuario insertado correctamente.');
+        res.redirect('/');
+    });
+});
+
+
 //Ruta para mostrar las películas en el listardatos.html con metodo GET
 app.get('/productos', (req, res) => {
     //Realiza una consulta SQL para seleccionar todas las filas de la tabla "peliculas"

@@ -10,6 +10,20 @@
 
 
 <body>
+
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="catalogo.html">Catálogo</a></li>
+                <li><a href="carrito.html">Carrito de Compra</a></li>
+                <li><a href="IniciarSesion.html">Iniciar Sesión</a></li>
+                <li><a href="registrar.html">Registrarse</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    
     <h2>Modificar Producto</h2> <!-- Encabezado principal de la página -->
     <form id="modificar-form" action="/modificar_producto" method="POST"> <!-- Formulario para modificar una película, que envía los datos mediante el método POST a la ruta /modificar_pelicula -->
         <input type="hidden" id="producto-id" name="id"> <!-- Campo oculto para almacenar el ID de la película -->
@@ -42,9 +56,9 @@
     </form>
 
     <script>
-        // Obtener el ID de la película de la URL
+        // Obtener el ID del producto de la URL
         const urlParams = new URLSearchParams(window.location.search); // Crea un objeto URLSearchParams para trabajar con los parámetros de la URL
-        const peliculaId = urlParams.get('id'); // Obtiene el valor del parámetro 'id' de la URL
+        const productoId = urlParams.get('id'); // Obtiene el valor del parámetro 'id' de la URL
         // Obtener el formulario y los campos
         const modificarForm = document.getElementById('modificar-form'); // Obtiene el formulario por su ID
         const idInput = document.getElementById('producto-id'); // Obtiene el campo oculto de ID
