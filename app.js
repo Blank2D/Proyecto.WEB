@@ -34,9 +34,9 @@ app.use(express.static(path.join(__dirname, 'pages')));
 
 //Recibo los valores y los envio a la tabla
 app.post('/guardar_producto',(req, res) => {
-    const { nombre, descripcion, categoria, precio } = req.body;
-    const sql = 'INSERT INTO Productos (NombreProducto, DescripcionProducto, NombreCategoria, PrecioProducto) VALUES (?, ?, ?, ?)';
-    connection.query(sql, [nombre, descripcion, categoria, precio], (err, result) => {
+    const { NombreProducto, DescripcionProducto, NombreCategoria, PrecioProducto, StockProducto } = req.body;
+    const sql = 'INSERT INTO Productos (NombreProducto, DescripcionProducto, NombreCategoria, PrecioProducto, StockProducto) VALUES (?, ?, ?, ?, ?)';
+    connection.query(sql, [NombreProducto, DescripcionProducto, NombreCategoria, PrecioProducto, StockProducto], (err, result) => {
         if (err) throw err;
         console.log('Producto insertado correctamente.');
         res.redirect('/');
@@ -59,7 +59,7 @@ app.delete('/eliminar_producto/:id', (req, res) => {
     //Obtiene el parámetro 'id' de la URL para eliminar la pelicula en especifico
     const id = req.params.id;
     //Define la consulta SQL para eliminar una película donde el ID coincida
-    const sql = 'DELETE FROM Productos WHERE id = ?';
+    const sql = 'DELETE FROM Productos WHERE idProducto = ?';
     //Ejecuta la consulta SQL, utilizando el Id que se enviara a la consulta SQL
     connection.query(sql, [id], (err, result) => {
         // Si ocurre un error durante la ejecución de la consulta, lanza una excepción
@@ -76,9 +76,9 @@ app.post('/modificar_producto', (req, res) => {
     // Desestructura los datos del cuerpo de la solicitud (req.body)
     const { id, nombre, descripcion, categoria, precio } = req.body;
     // Consulta SQL para actualizar los datos de la película en la base de datos
-    const sql = 'UPDATE Peliculas SET nombre = ?, descripcion = ?, categoria = ?, precio = ? WHERE id = ?';
+    const sql = 'UPDATE Productos SET NombreProducto = ?, DescripcionPoducto = ?, NombreCategoria = ?, PrecioProducto = ?, StockProducto = StockProducto + ? WHERE idProducto = ?';
     // Ejecuta la consulta SQL
-    connection.query(sql, [nombre, descripcion, categoria, precio, id], (err, result) => {
+    connection.query(sql, [NombreProducto, DescripcionProducto, NombreCategoria, PrecioProducto, idProducto], (err, result) => {
         if (err) {
             // Si ocurre un error, muestra un mensaje en la consola y envía una respuesta de error al cliente
             console.error('Error al modificar el producto:', err);
@@ -92,7 +92,7 @@ app.post('/modificar_producto', (req, res) => {
     });
 });
 
-app.post('/guardar_producto',(req, res) => {
+/*app.post('/guardar_producto',(req, res) => {
     const { nombre, descripcion, categoria, precio } = req.body;
     const sql = 'INSERT INTO Productos (nombre, descripcion, categoria, precio) VALUES (?, ?, ?, ?)';
     connection.query(sql, [nombre, descripcion, categoria, precio], (err, result) => {
@@ -110,7 +110,7 @@ app.post('/guardar_producto',(req, res) => {
         // Enviar los datos de la película como respuesta en formato JSON
         res.json(result[0]);
     });
-});
+});*/
 
 
 
