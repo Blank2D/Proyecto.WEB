@@ -29,32 +29,39 @@
         <h2>Registrar usuario</h2>
         <form action="/guardar_usuario" method="post">
             <div>
-                <label for="username">Nombre de usuario:</label>
-                <input type="text" id="username" name="username" required>
+                <label for="NombreUsuario">Nombre de usuario:</label>
+                <input type="text" id="NombreUsuario" name="NombreUsuario" required>
             </div>
             <br>
             <div>
-                <label for="usermail">Correo usuario:</label>
-                <input type="text" id="usermail" name="usermail" required>
+                <label for="CorreoUsuario">Correo usuario:</label>
+                <input type="text" id="CorreoUsuario" name="CorreoUsuario" required>
             </div>
             <br>
             <div>
-                <label for="password">Contraseña:</label>
-                <input type="password" id="password" name="password" required>
+                <label for="ContrasenaUsuario">Contraseña:</label>
+                <input type="password" id="ContrasenaUsuario" name="ContrasenaUsuario" required>
             </div>
             <div>
-                <label for="passwordVerify">Verificar Contraseña:</label>
-                <input type="password" id="passwordVerify" name="passwordVerify" required>
+                <label for="ValidacionContrasena">Validar Contraseña:</label>
+                <input type="password" id="ValidacionContrasena" name="ValidacionContrasena" required>
             </div>
             <br>
-            <br>
+            <div>
+                <label for="NombreRol">Rol:</label>
+                <select id="NombreRol" name="NombreRol" required>
+                    <option value="" disabled selected>Selecciona una categoría</option>
+                    <option value="Administrador">Administrador</option>
+                    <option value="Usuario">Usuario</option>
+                </select>
+            </div>
             <div>
                 <button type="submit">Crear Cuenta</button>
             </div>
             <br>
         </form>
         <div class="extra-buttons">
-            <a href="IniciarSesion.html" class="register-btn">¿Ya Tienes Cuenta? Inicia Session</a>
+            <a href="IniciarSesion.html" class="register-btn">¿Ya Tienes Cuenta? Inicia Sesión</a>
         </div>
     </section>
 </body>
