@@ -3,17 +3,17 @@ const express = require('express');
 //Libreria Path
 const path = require('path');
 //Libreria      
-const mysql = require('mysql');
+const mysql = require('mysql2');
 
 const app = express();
 const port = 3000;
 
 // Configurar la conexión a la base de datos
 const connection = mysql.createConnection({
-    host: '127.0.0.1',
+    host: 'localhost',
     user: 'root',
-    password: '1234',
-    database: 'VentasDB'
+    password: 'Enano2002$',
+    database: 'ventasdb'
 });
 
 //Verificacion de errores para validar si la conexion es correcta
@@ -35,7 +35,7 @@ app.use(express.static(path.join(__dirname, 'pages')));
 //Recibo los valores y los envio a la tabla
 app.post('/guardar_producto',(req, res) => {
     const { nombre, descripcion, categoria, precio } = req.body;
-    const sql = 'INSERT INTO Productos (nombre, descripcion, categoria, precio) VALUES (?, ?, ?, ?)';
+    const sql = 'INSERT INTO Productos (NombreProducto, DescripcionProducto, NombreCategoria, PrecioProducto) VALUES (?, ?, ?, ?)';
     connection.query(sql, [nombre, descripcion, categoria, precio], (err, result) => {
         if (err) throw err;
         console.log('Producto insertado correctamente.');
