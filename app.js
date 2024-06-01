@@ -39,7 +39,6 @@ app.post('/guardar_producto',(req, res) => {
     connection.query(sql, [NombreProducto, DescripcionProducto, NombreCategoria, PrecioProducto, StockProducto], (err, result) => {
         if (err) throw err;
         console.log('Producto insertado correctamente.');
-        res.redirect('/');
     });
 });
 
@@ -125,8 +124,11 @@ app.post('/guardar_usuario',(req, res) => {
     });
 });
 
+router.get('/inicio_sesion', (req, res) => {
+    const datosInicio = req.body;
 
-
+    
+}) 
 
 app.listen(port, () => {
     console.log('Servidor corriendo en http://localhost:3000');
