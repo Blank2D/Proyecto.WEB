@@ -30,7 +30,7 @@ app.use(express.urlencoded({ extended: true }));
 //Convierto en formato json
 app.use(express.json());
 //Configuro para que la aplicacon inicie desde el director o carpeta pagina principal
-app.use(express.static(path.join(__dirname, 'pages')));
+app.use(express.static(path.join(__dirname, 'public')));
 
 //Recibo los valores y los envio a la tabla
 app.post('/guardar_producto',(req, res) => {
