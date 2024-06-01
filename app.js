@@ -3,16 +3,16 @@ const express = require('express');
 //Libreria Path
 const path = require('path');
 //Libreria      
-const mysql = require('mysql');
+const mysql = require('mysql2');
 
 const app = express();
 const port = 3000;
 
 // Configurar la conexión a la base de datos
 const connection = mysql.createConnection({
-    host: '127.0.0.1:3307',
+    host: '127.0.0.1',
     user: 'root',
-    password: '',
+    password: '1234',
     database: 'ventasdb'
 });
 
@@ -30,7 +30,7 @@ app.use(express.urlencoded({ extended: true }));
 //Convierto en formato json
 app.use(express.json());
 //Configuro para que la aplicacon inicie desde el director o carpeta pagina principal
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public/pages')));
 
 //Recibo los valores y los envio a la tabla
 app.post('/guardar_producto',(req, res) => {
