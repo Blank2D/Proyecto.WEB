@@ -3,16 +3,16 @@ const express = require('express');
 //Libreria Path
 const path = require('path');
 //Libreria      
-const mysql = require('mysql2');
+const mysql = require('mysql');
 
 const app = express();
 const port = 3000;
 
 // Configurar la conexión a la base de datos
 const connection = mysql.createConnection({
-    host: 'localhost',
+    host: '127.0.0.1:3307',
     user: 'root',
-    password: 'Enano2002$',
+    password: '',
     database: 'ventasdb'
 });
 
