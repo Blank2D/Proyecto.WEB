@@ -53,12 +53,12 @@ app.post('/guardar_producto',(req, res) => {
     
     const imagenProductoLocal = req.files.ImagenProducto;
     const nombreimagen = req.files.ImagenProducto.name;
-    rutaImagenesLocal = __dirname + '/public/pages/images/' + nombreimagen;
+    rutaImagenesLocal = __dirname + '/public/pages/imagenesAlmacenadas/' + nombreimagen;
     imagenProductoLocal.mv(rutaImagenesLocal, (err) => {
         if(err) throw err;
     })
 
-    const rutaImagenes = 'images/' + nombreimagen;
+    const rutaImagenes = 'imagenesAlmacenadas/' + nombreimagen;
     const sql = 'INSERT INTO Productos (NombreProducto, DescripcionProducto, NombreCategoria, PrecioProducto, StockProducto, Imagenproducto) VALUES ( ?, ?, ?, ?, ?, ?)';
     connection.query(sql, [NombreProducto, DescripcionProducto, NombreCategoria, PrecioProducto, StockProducto, rutaImagenes], (err, result) => {
         if (err) throw err;
