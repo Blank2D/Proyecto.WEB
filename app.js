@@ -53,16 +53,18 @@ app.post('/guardar_producto',(req, res) => {
     
     const imagenProductoLocal = req.files.ImagenProducto;
     const nombreimagen = req.files.ImagenProducto.name;
-    rutaImagenes = __dirname + '/imagenes/' + nombreimagen;
-    imagenProductoLocal.mv(rutaImagenes, (err) => {
+    rutaImagenesLocal = __dirname + '/public/pages/images/' + nombreimagen;
+    imagenProductoLocal.mv(rutaImagenesLocal, (err) => {
         if(err) throw err;
     })
 
+    const rutaImagenes = 'images/' + nombreimagen;
     const sql = 'INSERT INTO Productos (NombreProducto, DescripcionProducto, NombreCategoria, PrecioProducto, StockProducto, Imagenproducto) VALUES ( ?, ?, ?, ?, ?, ?)';
     connection.query(sql, [NombreProducto, DescripcionProducto, NombreCategoria, PrecioProducto, StockProducto, rutaImagenes], (err, result) => {
         if (err) throw err;
         console.log('Producto insertado correctamente.');
     });
+    res.redirect('/AgregarCRUD.html');
 });
 
 
