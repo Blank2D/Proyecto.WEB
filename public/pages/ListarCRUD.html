@@ -54,18 +54,17 @@
                 // Obtener una referencia al elemento HTML con el ID 'productos-list'
                 var productosList = document.getElementById('productos-list');
                 // Iterar sobre cada película en los datos recibidos
-                data.forEach(function(productos) {
+                data.forEach(function(producto) {
                     // Crear una nueva fila de tabla
                     var row = document.createElement('tr');
                     // Establecer el contenido HTML de la fila con los datos del producto
-                    row.innerHTML = '<td>' + producto.nombre + '</td>' +
-                                    '<td>' + producto.descripcion + '</td>' +
-                                    '<td>' + new Date(producto.fecha).toLocaleDateString() + '</td>' +
-                                    '<td>' + producto.categoria + '</td>' +
-                                    '<td>' + producto.precio + '</td>' +
+                    row.innerHTML = '<td>' + producto.NombreProducto + '</td>' +
+                                    '<td>' + producto.DescripcionProducto + '</td>' +
+                                    '<td>' + producto.NombreCategoria + '</td>' +
+                                    '<td>' + producto.PrecioProducto + '</td>' +
                                     '<td>' +
-                                        '<button onclick="eliminarProducto(' + producto.id + ')">Eliminar</button>' +
-                                        '<button onclick="modificarProducto(' + producto.id + ')">Modificar</button>' +
+                                        '<button onclick="eliminarProducto(' + producto.idProducto + ')">Eliminar</button>' +
+                                        '<button onclick="modificarProducto(' + producto.idProducto + ')">Modificar</button>' +
                                     '</td>';
                     // Agregar la fila a la lista de productos
                     productosList.appendChild(row);
@@ -78,8 +77,8 @@
     <script>
         
         // Función para eliminar un producto
-        function eliminarProducto(id) {
-            fetch('/eliminar_producto/' + id, {
+        function eliminarProducto(idProducto) {
+            fetch('/eliminar_producto/' + idProducto, {
                 method: 'DELETE'
             })
             .then(function(response) {
