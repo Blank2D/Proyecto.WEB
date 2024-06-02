@@ -17,7 +17,7 @@ const port = 3000;
 const connection = mysql.createConnection({
     host: '127.0.0.1',
     user: 'root',
-    password: 'Miperrito1!',
+    password: '1234',
     database: 'ventasdb'
 });
 
@@ -83,24 +83,33 @@ app.delete('/eliminar_producto/:IdProducto', (req, res) => {
 
 
 app.post('/modificar_producto', (req, res) => {
-    // Desestructura los datos del cuerpo de la solicitud (req.body)
     const { IdProducto, NombreProducto, DescripcionProducto, NombreCategoria, PrecioProducto, StockProducto } = req.body;
-    // Consulta SQL para actualizar los datos de la película en la base de datos
+
     const sql = 'UPDATE Productos SET NombreProducto = ?, DescripcionProducto = ?, NombreCategoria = ?, PrecioProducto = ?, StockProducto = StockProducto + ? WHERE IdProducto = ?';
-    // Ejecuta la consulta SQL
     connection.query(sql, [NombreProducto, DescripcionProducto, NombreCategoria, PrecioProducto, StockProducto, IdProducto], (err, result) => {
         if (err) {
-            // Si ocurre un error, muestra un mensaje en la consola y envía una respuesta de error al cliente
             console.error('Error al modificar el producto:', err);
             res.status(500).send('Error interno del servidor');
             return;
         }
-        // Si la actualización es exitosa, muestra un mensaje en la consola
-        console.log('Producto modificado correctamente.');
-        // Redirecciona al usuario a la página de listado de películas
-        res.redirect('/listarCRUD.html');
+        console.log(req.body);
+        res.redirect('/ListarCRUD.html');
     });
 });
+
+app.get('/productos/:id', (req, res) => {
+    const productId = req.params.id;
+    const sql = 'SELECT * FROM Productos WHERE IdProducto = ?';
+    connection.query(sql, [productId], (err, result) => {
+        if (err) {
+            console.error('Error al obtener el producto:', err);
+            res.status(500).send('Error interno del servidor');
+            return;
+        }
+        res.json(result[0]);
+    });
+});
+
 
 /*app.post('/guardar_producto',(req, res) => {
     const { nombre, descripcion, categoria, precio } = req.body;
@@ -153,15 +162,7 @@ app.post('/iniciar_sesion', (req, res) => {
 
 
 
-//Ruta para mostrar las películas en el listardatos.html con metodo GET
-app.get('/productos', (req, res) => {
-    //Realiza una consulta SQL para seleccionar todas las filas de la tabla "peliculas"
-    connection.query('SELECT * FROM Productos', (err, rows) => {
-        //Maneja los errores, si los hay
-        if (err) throw err;
-        res.send(rows); //Aquí puedes enviar la respuesta como quieras (por ejemplo, renderizar un HTML o enviar un JSON)
-    });
-});
+
 
 app.listen(port, () => {
     console.log('Servidor corriendo en http://localhost:3000');
