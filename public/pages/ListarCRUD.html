@@ -61,8 +61,8 @@
                                     '<td>' + producto.NombreCategoria + '</td>' +
                                     '<td>' + producto.PrecioProducto + '</td>' +
                                     '<td>' +
-                                        '<button onclick="eliminarProducto(' + producto.idProducto + ')">Eliminar</button>' +
-                                        '<button onclick="modificarProducto(' + producto.idProducto + ')">Modificar</button>' +
+                                        '<button onclick="eliminarProducto(' + producto.IdProducto + ')">Eliminar</button>' +
+                                        '<button onclick="modificarProducto(' + producto.IdProducto + ')">Modificar</button>' +
                                     '</td>';
                     // Agregar la fila a la lista de productos
                     productosList.appendChild(row);
@@ -75,8 +75,8 @@
     <script>
         
         // Función para eliminar un producto
-        function eliminarProducto(idProducto) {
-            fetch('/eliminar_producto/' + idProducto, {
+        function eliminarProducto(IdProducto) {
+            fetch('/eliminar_producto/' + IdProducto, {
                 method: 'DELETE'
             })
             .then(function(response) {
@@ -97,9 +97,9 @@
 
     <script>
         // Función para modificar un producto
-        function modificarProducto(id) {
+        function modificarProducto(IdProducto) {
             // Redirigir a la página de modificación de producto con el ID correspondiente
-            window.location.href = '/modificar_producto.html?id=' + id;
+            window.location.href = '/ModificarCRUD.html?id=' + IdProducto;
         }
     </script>
 </body>
