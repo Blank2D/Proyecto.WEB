@@ -12,7 +12,7 @@ const port = 3000;
 const connection = mysql.createConnection({
     host: '127.0.0.1',
     user: 'root',
-    password: '1234',
+    password: 'Miperrito1!',
     database: 'ventasdb'
 });
 
@@ -124,7 +124,7 @@ app.post('/guardar_usuario',(req, res) => {
     });
 });
 
-router.get('/inicio_sesion', (req, res) => {
+app.get('/inicio_sesion', (req, res) => {
     const datosInicio = req.body;
 
     
