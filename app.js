@@ -21,7 +21,7 @@ const port = 3000;
 const connection = mysql.createConnection({
     host: '127.0.0.1',
     user: 'root',
-    password: 'Miperrito1!',
+    password: '1234',
     database: 'ventasdb'
 });
 
@@ -80,6 +80,20 @@ app.get('/productos', (req, res) => {
 });
 
 
+//METODO PARA TRAER SOLO 4 Productos
+app.get('/productos_inicio', (req, res) => {
+    //Realiza una consulta SQL para seleccionar todas las filas de la tabla "peliculas"
+    connection.query('SELECT * FROM Productos LIMIT 4', (err, rows) => {
+        //Maneja los errores, si los hay
+        if (err) throw err;
+        res.send(rows); //Aquí puedes enviar la respuesta como quieras (por ejemplo, renderizar un HTML o enviar un JSON)
+    });
+});
+
+
+
+
+
 //Define una ruta DELETE en la aplicación Express para eliminar una película por su ID
 app.delete('/eliminar_producto/:IdProducto', (req, res) => {
     //Obtiene el parámetro 'id' de la URL para eliminar la pelicula en especifico
@@ -127,25 +141,7 @@ app.get('/productos/:id', (req, res) => {
 });
 
 
-/*app.post('/guardar_producto',(req, res) => {
-    const { nombre, descripcion, categoria, precio } = req.body;
-    const sql = 'INSERT INTO Productos (nombre, descripcion, categoria, precio) VALUES (?, ?, ?, ?)';
-    connection.query(sql, [nombre, descripcion, categoria, precio], (err, result) => {
-        if (err) {
-            // Manejar el error si ocurre durante la consulta
-            console.error('Error al obtener los datos de la película:', err);
-            res.status(500).send('Error interno del servidor');
-            return;
-        }
-        // Verificar si no se encontró ninguna película con el ID proporcionado
-        if (result.length === 0) {
-            res.status(404).send('Película no encontrada');
-            return;
-        }
-        // Enviar los datos de la película como respuesta en formato JSON
-        res.json(result[0]);
-    });
-});*/
+
 
 //Recibo los valores y los envio a la tabla
 app.post('/guardar_usuario',(req, res) => {
