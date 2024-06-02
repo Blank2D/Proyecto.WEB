@@ -5,8 +5,12 @@ const path = require('path');
 //Libreria      
 const mysql = require('mysql2');
 
+const fileupload = require('express-fileupload');
+
+const fs = require('fs')
 // hola
-const bodyParser = require('body-parser');
+const busboy = require('connect-busboy');
+const { error } = require('console');
 
 
 
@@ -17,13 +21,15 @@ const port = 3000;
 const connection = mysql.createConnection({
     host: '127.0.0.1',
     user: 'root',
-    password: '1234',
+    password: 'Miperrito1!',
     database: 'ventasdb'
 });
 
 
-// Configura body-parser
-app.use(bodyParser.urlencoded({ extended: true }));
+// Configura busboy
+app.use(busboy()); 
+
+app.use(fileupload());
 
 //Verificacion de errores para validar si la conexion es correcta
 connection.connect((err) => {
@@ -44,8 +50,16 @@ app.use(express.static(path.join(__dirname, 'public/pages')));
 //Recibo los valores y los envio a la tabla
 app.post('/guardar_producto',(req, res) => {
     const { NombreProducto, DescripcionProducto, NombreCategoria, PrecioProducto, StockProducto } = req.body;
-    const sql = 'INSERT INTO Productos (NombreProducto, DescripcionProducto, NombreCategoria, PrecioProducto, StockProducto) VALUES (?, ?, ?, ?, ?)';
-    connection.query(sql, [NombreProducto, DescripcionProducto, NombreCategoria, PrecioProducto, StockProducto], (err, result) => {
+    
+    const imagenProductoLocal = req.files.ImagenProducto;
+    const nombreimagen = req.files.ImagenProducto.name;
+    rutaImagenes = __dirname + '/imagenes/' + nombreimagen;
+    imagenProductoLocal.mv(rutaImagenes, (err) => {
+        if(err) throw err;
+    })
+
+    const sql = 'INSERT INTO Productos (NombreProducto, DescripcionProducto, NombreCategoria, PrecioProducto, StockProducto, Imagenproducto) VALUES ( ?, ?, ?, ?, ?, ?)';
+    connection.query(sql, [NombreProducto, DescripcionProducto, NombreCategoria, PrecioProducto, StockProducto, rutaImagenes], (err, result) => {
         if (err) throw err;
         console.log('Producto insertado correctamente.');
     });

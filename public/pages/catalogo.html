@@ -25,5 +25,51 @@
             </ul>
         </nav>
     </header>
+
+    <h2>Productos</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Categoría</th>
+                <th>Precio</th>
+                <th>Imagen</th>
+            </tr>
+        </thead>
+        <tbody id="productos-list"></tbody>
+    </table>
+
+    <script>
+        // Función para cargar los productos al cargar la página
+        window.onload = function () {
+            // Realizar una solicitud GET a la ruta /peliculas
+            fetch('/productos')
+            // Procesar la respuesta como JSON
+            .then(function(response) {
+                return response.json();
+            })
+            // Cuando se obtienen los datos JSON
+            .then(function(data) {
+                // Obtener una referencia al elemento HTML con el ID 'productos-list'
+                var productosList = document.getElementById('productos-list');
+                // Iterar sobre cada película en los datos recibidos
+                data.forEach(function(producto) {
+                    // Crear una nueva fila de tabla
+                    var row = document.createElement('tr');
+                    // Establecer el contenido HTML de la fila con los datos del producto
+                    row.innerHTML = '<td>' + producto.NombreProducto + '</td>' +
+                                    '<td>' + producto.DescripcionProducto + '</td>' +
+                                    '<td>' + producto.NombreCategoria + '</td>' +
+                                    '<td>' + producto.PrecioProducto + '</td>' +
+                                    '<td>' + <a href = {producto.ImagenProducto} ></a> + '</td>'
+                    // Agregar la fila a la lista de productos
+                    productosList.appendChild(row);
+
+                });
+            });
+        };
+    </script>
+
 </body>
 </html>

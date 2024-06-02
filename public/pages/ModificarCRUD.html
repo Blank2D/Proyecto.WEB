@@ -1,39 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Metadatos del documento -->
+    <meta charset="UTF-8"> <!-- Define la codificación de caracteres como UTF-8 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Configura la vista del documento para que sea adecuada para todos los dispositivos, asegurando la correcta visualización en móviles -->
     <link rel="stylesheet" href="../css/crud.css">
-    <title>Modificar Producto</title>
+    <title>Modificar Película</title> <!-- Título de la página que aparece en la pestaña del navegador -->
 </head>
+
 <body>
     <div class="div_logo_nombre_tienda">
         <img src="images/Logo.png" alt="Logo de La Tiendita" width="50" height="50">
         <h1>La Tiendita</h1>
     </div>
 
+
     <nav>
         <ul>
             <li><a href="AgregarCRUD.html">Registrar Productos</a></li>
             <li><a href="ListarCRUD.html">Listar Productos</a></li>
             <li><a href="IniciarSesion.html">Iniciar Sesión</a></li>
+  
         </ul>
     </nav>
 
-    <h2>Modificar Producto</h2>
-    <form id="modificar-form" action="/modificar_producto" method="POST">
-        <input type="hidden" id="IdProducto" name="IdProducto"> <!-- Campo oculto para almacenar el ID del producto -->
+    
+    <h2>Modificar Producto</h2> <!-- Encabezado principal de la página -->
+    <form id="modificar-form" action="/modificar_producto" method="POST"> <!-- Formulario para modificar una película, que envía los datos mediante el método POST a la ruta /modificar_pelicula -->
+            <input type="hidden" id="IdProducto" name="IdProducto"> <!-- Campo oculto para almacenar el ID de la película -->
         <div>
-            <label for="nombre">Nombre:</label>
-            <input type="text" id="nombre" name="NombreProducto" required>
+            <label for="nombre">Nombre:</label> <!-- Etiqueta para el campo de nombre -->
+            <input type="text" id="nombre" name="nombre" required> <!-- Campo de entrada de texto para el nombre de la película, obligatorio -->
         </div>
         <div>
-            <label for="descripcion">Descripción:</label>
-            <input type="text" id="descripcion" name="DescripcionProducto" required>
+            <label for="descripcion">Descripción:</label> <!-- Etiqueta para el campo de descripción -->
+            <input type="text" id="descripcion" name="descripcion" required> <!-- Campo de entrada de texto para la descripción de la película, obligatorio -->
         </div>
         <div>
-            <label for="categoria">Categoria:</label>
-            <select id="categoria" name="NombreCategoria" required>
+            <label for="categoria">Categoria:</label> <!-- Etiqueta para el campo de categoría -->
+            <select id="categoria" name="categoria" required>
                 <option value="" disabled selected>Selecciona una categoría</option>
                 <option value="cosplay">Cosplay</option>
                 <option value="figura">Figura</option>
@@ -41,43 +46,43 @@
             </select>
         </div>
         <div>
-            <label for="precio">Precio:</label>
-            <input type="number" id="precio" name="PrecioProducto" required>
+            <label for="precio">Precio:</label> <!-- Etiqueta para el campo de precio de entrada -->
+            <input type="number" id="precio" name="precio" required><br> <!-- Campo de entrada numérica para el precio de entrada, obligatorio -->
         </div>
         <div>
             <label for="stock">Stock a agregar:</label>
-            <input type="number" id="stock" name="StockProducto" required>
+            <input type="int" id="stock" name="stock" required>
         </div>
-        <button type="submit">Guardar Cambios</button>
+        <button type="submit">Guardar Cambios</button> <!-- Botón para enviar el formulario -->
     </form>
 
     <script>
-        // Obtener el ID del producto de la URL
-        const urlParams = new URLSearchParams(window.location.search);
-        const productoId = urlParams.get('id');
+            // Obtener el ID del producto de la URL
+            const urlParams = new URLSearchParams(window.location.search); // Crea un objeto URLSearchParams para trabajar con los parámetros de la URL
+            const productoId = urlParams.get('id'); // Obtiene el valor del parámetro 'id' de la URL
+            // Obtener el formulario y los campos
+            const modificarForm = document.getElementById('modificar-form'); // Obtiene el formulario por su ID
+            const idInput = document.getElementById('IdProducto'); // Obtiene el campo oculto de ID
+            const nombreInput = document.getElementById('NombreProducto'); // Obtiene el campo de nombre
+            const descripcionInput = document.getElementById('DescripcionProducto'); // Obtiene el campo de descripción
+            const categoriaInput = document.getElementById('NombreCategoria'); // Obtiene el campo de categoría
+            const precioInput = document.getElementById('PrecioProducto'); // Obtiene el campo de precio
+            const stockInput = document.getElementById('StockProducto'); // Obtiene el campo de Stock
 
-        // Obtener el formulario y los campos
-        const modificarForm = document.getElementById('modificar-form');
-        const idInput = document.getElementById('IdProducto');
-        const nombreInput = document.getElementById('nombre');
-        const descripcionInput = document.getElementById('descripcion');
-        const categoriaInput = document.getElementById('categoria');
-        const precioInput = document.getElementById('precio');
-        const stockInput = document.getElementById('stock');
-
-        // Rellenar el formulario con los datos del producto correspondiente
-        fetch('/productos/' + productoId)
-            .then(response => response.json())
+            // Rellenar el formulario con los datos de la película correspondiente
+            fetch('/productos/' + productoId) // Realiza una solicitud para obtener los datos de la película con el ID especificado
+            .then(response => response.json()) // Convierte la respuesta en un objeto JSON
             .then(producto => {
                 // Asigna los datos obtenidos a los campos del formulario
+                productoId.value = producto.IdProducto;
                 nombreInput.value = producto.NombreProducto;
                 descripcionInput.value = producto.DescripcionProducto;
                 categoriaInput.value = producto.NombreCategoria;
                 precioInput.value = producto.PrecioProducto;
                 stockInput.value = producto.StockProducto;
-                idInput.value = producto.IdProducto;
             })
-            .catch(error => console.error('Error al obtener los datos del producto:', error));
-    </script>
+            // Muestra un error en la consola si la solicitud falla
+
+            </script>
 </body>
 </html>

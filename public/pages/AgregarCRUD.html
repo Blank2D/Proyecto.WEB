@@ -29,7 +29,7 @@
         <h2>Agregar producto</h2>
 
 
-        <form id="Agregar Producto" action="/guardar_producto" method="post">
+        <form id="Agregar Producto" action="/guardar_producto" method="post" enctype="multipart/form-data">
     
             <div>
                 <label for="NombreProducto">Nombre Producto:</label>
@@ -41,7 +41,7 @@
             </div>
             <div>
                 <label for="PrecioProducto">Precio:</label>
-                <input type="int" id="PrecioProducto" name="PrecioProducto" required>
+                <input type="number" id="PrecioProducto" name="PrecioProducto" required>
             </div>
             <div>
                 <label for="NombreCategoria">Categoría:</label>
@@ -54,9 +54,12 @@
             </div>
             <div>
                 <label for="StockProducto">Stock:</label>
-                <input type="int" id="StockProducto" name="StockProducto" required>
+                <input type="number" id="StockProducto" name="StockProducto" required>
             </div>
-
+            <div>
+                <label for="ImagenProducto">Imagen:</label>
+                <input id="ImagenProducto" name="ImagenProducto" type="file"/>
+            </div>
             <input type="submit" value="Enviar">
 
         </form>
