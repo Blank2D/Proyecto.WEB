@@ -20,7 +20,7 @@ CREATE TABLE Productos (
     DescripcionProducto TEXT,
     StockProducto INT,
     PrecioProducto FLOAT,
-    ImagenProducto BLOB,
+    ImagenProducto VARCHAR(255),
     NombreCategoria VARCHAR(100)
 );
 
