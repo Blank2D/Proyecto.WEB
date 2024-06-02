@@ -27,7 +27,7 @@
     
     <h2>Modificar Producto</h2> <!-- Encabezado principal de la página -->
     <form id="modificar-form" action="/modificar_producto" method="POST"> <!-- Formulario para modificar una película, que envía los datos mediante el método POST a la ruta /modificar_pelicula -->
-        <input type="hidden" id="producto-id" name="id"> <!-- Campo oculto para almacenar el ID de la película -->
+        <input type="hidden" id="IdProducto" name="IdProducto"> <!-- Campo oculto para almacenar el ID de la película -->
         <div>
             <label for="nombre">Nombre:</label> <!-- Etiqueta para el campo de nombre -->
             <input type="text" id="nombre" name="nombre" required> <!-- Campo de entrada de texto para el nombre de la película, obligatorio -->
@@ -60,25 +60,24 @@
         
         // Obtener el ID del producto de la URL
         const urlParams = new URLSearchParams(window.location.search); // Crea un objeto URLSearchParams para trabajar con los parámetros de la URL
-        const productoId = urlParams.get('id'); // Obtiene el valor del parámetro 'id' de la URL
+        const productoId = urlParams.get('IdProducto'); // Obtiene el valor del parámetro 'id' de la URL
         // Obtener el formulario y los campos
         const modificarForm = document.getElementById('modificar-form'); // Obtiene el formulario por su ID
-        const idInput = document.getElementById('producto-id'); // Obtiene el campo oculto de ID
-        const nombreInput = document.getElementById('nombre'); // Obtiene el campo de nombre
-        const descripcionInput = document.getElementById('descripcion'); // Obtiene el campo de descripción
-        const categoriaInput = document.getElementById('categoria'); // Obtiene el campo de categoría
-        const precioInput = document.getElementById('precio'); // Obtiene el campo de precio
+        const idInput = document.getElementById('IdProducto'); // Obtiene el campo oculto de ID
+        const nombreInput = document.getElementById('NombreProducto'); // Obtiene el campo de nombre
+        const descripcionInput = document.getElementById('DescripcionProducto'); // Obtiene el campo de descripción
+        const categoriaInput = document.getElementById('NombreCategoria'); // Obtiene el campo de categoría
+        const precioInput = document.getElementById('PrecioProducto'); // Obtiene el campo de precio
 
         // Rellenar el formulario con los datos de la película correspondiente
         fetch('/productos/' + productoId) // Realiza una solicitud para obtener los datos de la película con el ID especificado
             .then(response => response.json()) // Convierte la respuesta en un objeto JSON
             .then(producto => {
                 // Asigna los datos obtenidos a los campos del formulario
-                idInput.value = producto.id;
-                nombreInput.value = producto.nombre;
-                descripcionInput.value = producto.descripcion;
-                categoriaInput.value = producto.categoria;
-                precioInput.value = producto.precio;
+                nombreInput.value = producto.NombreProducto;
+                descripcionInput.value = producto.DescripcionProducto;
+                categoriaInput.value = producto.NombreCategoria;
+                precioInput.value = producto.PrecioProducto;
             })
    // Muestra un error en la consola si la solicitud falla
     </script>

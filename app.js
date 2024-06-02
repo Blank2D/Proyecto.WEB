@@ -65,9 +65,9 @@ app.get('/productos', (req, res) => {
 
 
 //Define una ruta DELETE en la aplicación Express para eliminar una película por su ID
-app.delete('/eliminar_producto/:id', (req, res) => {
+app.delete('/eliminar_producto/:IdProducto', (req, res) => {
     //Obtiene el parámetro 'id' de la URL para eliminar la pelicula en especifico
-    const id = req.params.id;
+    const id = req.params.IdProducto;
     //Define la consulta SQL para eliminar una película donde el ID coincida
     const sql = 'DELETE FROM Productos WHERE idProducto = ?';
     //Ejecuta la consulta SQL, utilizando el Id que se enviara a la consulta SQL
@@ -84,11 +84,11 @@ app.delete('/eliminar_producto/:id', (req, res) => {
 
 app.post('/modificar_producto', (req, res) => {
     // Desestructura los datos del cuerpo de la solicitud (req.body)
-    const { id, nombre, descripcion, categoria, precio } = req.body;
+    const { IdProducto, NombreProducto, DescripcionProducto, NombreCategoria, PrecioProducto, StockProducto } = req.body;
     // Consulta SQL para actualizar los datos de la película en la base de datos
-    const sql = 'UPDATE Productos SET NombreProducto = ?, DescripcionPoducto = ?, NombreCategoria = ?, PrecioProducto = ?, StockProducto = StockProducto + ? WHERE idProducto = ?';
+    const sql = 'UPDATE Productos SET NombreProducto = ?, DescripcionProducto = ?, NombreCategoria = ?, PrecioProducto = ?, StockProducto = StockProducto + ? WHERE IdProducto = ?';
     // Ejecuta la consulta SQL
-    connection.query(sql, [NombreProducto, DescripcionProducto, NombreCategoria, PrecioProducto, idProducto], (err, result) => {
+    connection.query(sql, [NombreProducto, DescripcionProducto, NombreCategoria, PrecioProducto, StockProducto, IdProducto], (err, result) => {
         if (err) {
             // Si ocurre un error, muestra un mensaje en la consola y envía una respuesta de error al cliente
             console.error('Error al modificar el producto:', err);
