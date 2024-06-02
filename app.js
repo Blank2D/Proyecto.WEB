@@ -5,6 +5,11 @@ const path = require('path');
 //Libreria      
 const mysql = require('mysql2');
 
+// hola
+const bodyParser = require('body-parser');
+
+
+
 const app = express();
 const port = 3000;
 
@@ -12,9 +17,13 @@ const port = 3000;
 const connection = mysql.createConnection({
     host: '127.0.0.1',
     user: 'root',
-    password: '',
+    password: '1234',
     database: 'ventasdb'
 });
+
+
+// Configura body-parser
+app.use(bodyParser.urlencoded({ extended: true }));
 
 //Verificacion de errores para validar si la conexion es correcta
 connection.connect((err) => {
@@ -124,11 +133,35 @@ app.post('/guardar_usuario',(req, res) => {
     });
 });
 
-app.get('/inicio_sesion', (req, res) => {
-    const datosInicio = req.body;
+app.post('/iniciar_sesion', (req, res) => {
+    const { username, password } = req.body;
 
-    
-}) 
+    // Consulta para verificar el usuario y la contraseña
+    const query = 'SELECT * FROM usuarios WHERE NombreUsuario = ? AND ContrasenaUsuario = ?';
+    connection.query(query, [username, password], (err, results) => {
+        if (err) throw err;
+
+        if (results.length > 0) {
+            // Si el usuario y la contraseña coinciden, redirige al usuario a ListarCRUD.html
+            res.redirect('/ListarCRUD.html');
+        } else {
+            // Si no coinciden, envía un mensaje de error
+            res.send('Nombre de usuario o contraseña incorrectos.');
+        }
+    });
+});
+
+
+
+//Ruta para mostrar las películas en el listardatos.html con metodo GET
+app.get('/productos', (req, res) => {
+    //Realiza una consulta SQL para seleccionar todas las filas de la tabla "peliculas"
+    connection.query('SELECT * FROM Productos', (err, rows) => {
+        //Maneja los errores, si los hay
+        if (err) throw err;
+        res.send(rows); //Aquí puedes enviar la respuesta como quieras (por ejemplo, renderizar un HTML o enviar un JSON)
+    });
+});
 
 app.listen(port, () => {
     console.log('Servidor corriendo en http://localhost:3000');
