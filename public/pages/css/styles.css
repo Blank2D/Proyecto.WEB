@@ -1,203 +1,104 @@
-/* estilos.css */
-
-/* Estilos generales */
 body {
     font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f8f8f8;
+    line-height: 1.6;
+    color: #333;
 }
 
-/* Encabezado con logo y nombre de la tienda */
 .div_logo_nombre_tienda {
     display: flex;
     align-items: center;
     padding: 20px;
-    background-color: #ffffff;
-    color: white;
+    background-color: #f8f9fa;
+    justify-content: center; /* Centrar el contenido */
 }
 
 .div_logo_nombre_tienda img {
-    margin-right: 10px;
-    height: 5%;
-    width: 5%;
+    margin-right: 15px;
 }
 
 .div_logo_nombre_tienda h1 {
-    font-size: 24px;
-    margin: 0;
-    color: #333;
+    font-size: 3rem; /* Hacer el texto más grande */
+    font-weight: bold; /* Hacer que el texto resalte más */
 }
 
-/* Estilos de la barra de navegación */
 header {
-    background-color: #333;
+    background-color: #343a40;
 }
 
 nav ul {
     list-style-type: none;
-    margin: 0;
     padding: 0;
-    overflow: hidden;
-    text-align: center;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    height: 70px; /* Hacer la barra de navegación más alta */
+    align-items: center; /* Centrar el texto verticalmente */
 }
 
 nav ul li {
-    display: inline;
-    margin: 0 15px;
+    margin: 0 20px; /* Aumentar el margen entre los elementos */
 }
 
 nav ul li a {
+    color: #fff;
     text-decoration: none;
-    color: white;
-    padding: 14px 20px;
-    display: inline-block;
+    font-size: 1.2rem; /* Hacer el texto más grande */
 }
 
 nav ul li a:hover {
-    background-color: #4CAF50;
-    color: white;
-    border-radius: 4px;
+    text-decoration: underline;
 }
 
-/* Estilos para la sección de catálogo */
-section.catalogo {
-    padding: 20px;
+h1 {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.card-container {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
+    gap: 16px;
+    justify-content: center;
+    margin-top: 20px;
 }
 
-section.catalogo .producto {
-    background-color: white;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    margin: 10px;
-    padding: 15px;
-    width: 200px;
-    text-align: center;
-}
-
-section.catalogo .producto img {
-    max-width: 100%;
-    height: auto;
-    border-bottom: 1px solid #ddd;
-    padding-bottom: 10px;
-}
-
-section.catalogo .producto h2 {
-    font-size: 18px;
-    color: #333;
-    margin: 10px 0;
-}
-
-section.catalogo .producto p {
-    font-size: 14px;
-    color: #666;
-    margin: 10px 0;
-}
-
-section.catalogo .producto .precio {
-    font-size: 16px;
-    color: #4CAF50;
-    margin: 10px 0;
-}
-
-section.catalogo .producto button {
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    cursor: pointer;
-    border-radius: 5px;
-}
-
-section.catalogo .producto button:hover {
-    background-color: #45a049;
-}
-
-/* Estilos para el carrito de compra */
-section.carrito {
-    padding: 20px;
-}
-
-section.carrito h2 {
-    font-size: 24px;
-    color: #333;
-    margin-bottom: 20px;
-}
-
-section.carrito table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-section.carrito table, th, td {
-    border: 1px solid #ddd;
-}
-
-section.carrito th, td {
-    padding: 10px;
-    text-align: left;
-}
-
-section.carrito th {
-    background-color: #f2f2f2;
-}
-
-/* Estilos para la sección de inicio de sesión */
-section.iniciar-sesion {
-    padding: 20px;
-    max-width: 400px;
+.content, .contact-info {
+    max-width: 800px;
     margin: 0 auto;
-    background-color: white;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    margin-top: 20px;
 }
 
-section.iniciar-sesion h2 {
-    font-size: 24px;
-    color: #333;
-    margin-bottom: 20px;
-}
-
-section.iniciar-sesion form {
-    display: flex;
-    flex-direction: column;
-}
-
-section.iniciar-sesion label {
-    font-size: 14px;
-    margin-bottom: 5px;
-}
-
-section.iniciar-sesion input {
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-}
-
-section.iniciar-sesion button {
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    cursor: pointer;
-    border-radius: 5px;
-}
-
-section.iniciar-sesion button:hover {
-    background-color: #45a049;
-}
-
-/* Estilos del pie de página */
-footer {
-    background-color: #333;
-    color: white;
+h2 {
     text-align: center;
-    padding: 10px 0;
-    position: fixed;
-    width: 100%;
-    bottom: 0;
+    margin-top: 20px;
+}
+
+.footer {
+    width: 100%; /* Hacer que el pie de página tome el ancho completo */
+    text-align: center;
+    padding: 20px;
+    background-color: #343a40;
+    color: #fff;
+    margin-top: 20px;
+}
+
+.footer p {
+    margin: 5px 0;
+}
+
+.footer a {
+    color: #17a2b8; /* Cambiar el color de los enlaces a redes sociales */
+    text-decoration: none;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}
+
+.mapa {
+    display: block;
+    margin: 0 auto; /* Centrar el mapa */
 }

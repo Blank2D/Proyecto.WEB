@@ -4,33 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <script src="./js/validaciones.js"></script>
-
+    <link rel="stylesheet" href="../css/styles.css">
 </head>
 <body>
-    <style>
-        .card-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 16px;
-            justify-content: center;
-            margin-top: 20px;
-        }
-        .card {
-            margin: 10px;
-        }
-        .card-body {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-    </style>
-
-
     <div class="div_logo_nombre_tienda">
-        <img src="images/Logo.png" alt="Logo de La Tiendita" width="50" height="50">
+        <img src="images/Logo.png" alt="Logo de La Tiendita" width="110" height="110">
         <h1>La Tiendita</h1>
     </div>
 
@@ -41,25 +20,70 @@
                 <li><a href="ListarCRUD.html">Listar Productos</a></li>
                 <li><a href="index.html">Inicio</a></li>
                 <li><a href="catalogo.html">Catálogo</a></li>
-                <li><a href="carrito.html">Carrito de Compra</a></li>
                 <li><a href="IniciarSesion.html">Iniciar Sesión</a></li>
             </ul>
         </nav>
     </header>
 
+    <h1>Nuestros Productos</h1>
+    <hr>
 
-
-
-    <h2>Productos</h2>
-   
     <div class="card-container" id="productos-list"></div>
 
+    <hr>
+    <div class="content">
+        <h1>Sobre Nosotros</h1>
+        <br>
+        <p>Bienvenidos a nuestra Tienda de Figuras 3D, donde la creatividad y la tecnología se unen para dar vida a tus personajes y diseños favoritos. Somos un equipo apasionado de artistas y técnicos especializados en la impresión 3D, dedicados a ofrecerte productos de alta calidad y un servicio excepcional.</p>
+        <p>Nuestra misión es transformar tus ideas en realidades tangibles mediante el uso de la última tecnología en impresión 3D. Nos enorgullecemos de nuestra atención al detalle y nuestro compromiso con la satisfacción del cliente, asegurando que cada figura que producimos cumpla con los más altos estándares de calidad.</p>
+        <p>Desde figuras de acción y personajes de tus películas y videojuegos favoritos, hasta diseños personalizados y piezas de colección, en nuestra tienda encontrarás una amplia variedad de productos para todos los gustos. Nuestro equipo está siempre disponible para ayudarte a crear figuras únicas y personalizadas que se adapten a tus necesidades y preferencias.</p>
+        <p>Gracias por visitarnos y esperamos que disfrutes de nuestra colección tanto como nosotros disfrutamos creándola. Si tienes alguna pregunta o necesitas más información, no dudes en contactarnos. ¡Estamos aquí para ayudarte!</p>
+    </div>
+
+    <div class="content">
+        <h1>Dónde Encontrarnos</h1>
+        <br>
+        <p>Nos complace recibirte en nuestra tienda física, donde puedes explorar nuestra colección de figuras 3D y conocer de cerca nuestro proceso de creación. A continuación, te proporcionamos nuestra dirección y un mapa interactivo para que puedas encontrarnos fácilmente.</p>
+        <div class="contact-info">
+            <h3>Dirección:</h3>
+            <p>Calle de las Figuras 3D, 123<br>
+            Avenida antidisturbios<br>
+            Santiago de Chile</p>
+            <h3>Horario de Atención:</h3>
+            <p>Lunes a Viernes: 9:00 AM - 6:00 PM<br>
+            Sábado: 10:00 AM - 4:00 PM<br>
+            Domingo: Cerrado</p>
+            <h3>Teléfono:</h3>
+            <p>+123 456 7890</p>
+            <h3>Correo Electrónico:</h3>
+            <p>contacto@tiendadefiguras3d.com</p>
+        </div>
+    </div>
+
+    <div class="content">
+        <h1>Ubicación</h1>
+        <iframe class="mapa" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d212999.27284532675!2d-70.79497772783013!3d-33.47239205445417!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9662c5410425af2f%3A0x8475d53c400f0931!2sSantiago%2C%20Regi%C3%B3n%20Metropolitana!5e0!3m2!1ses-419!2scl!4v1717369265789!5m2!1ses-419!2scl" width="700" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2024 Tienda de Figuras 3D. Todos los derechos reservados.</p>
+        <p>Visítanos en nuestras redes sociales:</p>
+        <p>
+            <a href="https://www.youtube.com/watch?v=mCdA4bJAGGk">Facebook</a> |
+            <a href="https://www.youtube.com/watch?v=mCdA4bJAGGk">Instagram</a> |
+            <a href="https://www.youtube.com/watch?v=mCdA4bJAGGk">Twitter</a>
+        </p>
+        <p>
+            <a href="https://www.youtube.com/watch?v=mCdA4bJAGGk">Política de Privacidad</a> |
+            <a href="https://www.youtube.com/watch?v=mCdA4bJAGGk">Términos de Servicio</a>
+        </p>
+    </div>
 
     <script>
         // Función para cargar las películas al cargar la página
         window.onload = function () {
             // Realizar una solicitud GET a la ruta /peliculas
-            fetch('/productos')
+            fetch('/productos_inicio')
             // Procesar la respuesta como JSON
             .then(function(response) {
                 return response.json();
@@ -88,8 +112,6 @@
                 });
             });
         };
-         
     </script>
-
 </body>
 </html>

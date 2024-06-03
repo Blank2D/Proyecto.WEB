@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="../css/styles.css">
-    <script src="./js/validaciones.js"></script>
 </head>
 <body>
     <div class="div_logo_nombre_tienda">
-        <img src="images/Logo.png" alt="Logo de La Tiendita" width="50" height="50">
+        <img src="images/Logo.png" alt="Logo de La Tiendita" width="110" height="110">
         <h1>La Tiendita</h1>
     </div>
 
@@ -20,28 +20,20 @@
                 <li><a href="ListarCRUD.html">Listar Productos</a></li>
                 <li><a href="index.html">Inicio</a></li>
                 <li><a href="catalogo.html">Catálogo</a></li>
-                <li><a href="carrito.html">Carrito de Compra</a></li>
                 <li><a href="IniciarSesion.html">Iniciar Sesión</a></li>
             </ul>
         </nav>
     </header>
 
-    <h2>Productos</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>Nombre</th>
-                <th>Descripción</th>
-                <th>Categoría</th>
-                <th>Precio</th>
-                <th>Imagen</th>
-            </tr>
-        </thead>
-        <tbody id="productos-list"></tbody>
-    </table>
+    <h1>Catálogo Productos</h1>
+    <hr>
+
+    <div class="card-container" id="productos-list"></div>
+
+
 
     <script>
-        // Función para cargar los productos al cargar la página
+        // Función para cargar las películas al cargar la página
         window.onload = function () {
             // Realizar una solicitud GET a la ruta /peliculas
             fetch('/productos')
@@ -51,25 +43,28 @@
             })
             // Cuando se obtienen los datos JSON
             .then(function(data) {
-                // Obtener una referencia al elemento HTML con el ID 'productos-list'
+                // Obtener una referencia al elemento HTML con el ID 'peliculas-list'
                 var productosList = document.getElementById('productos-list');
                 // Iterar sobre cada película en los datos recibidos
                 data.forEach(function(producto) {
-                    // Crear una nueva fila de tabla
-                    var row = document.createElement('tr');
-                    // Establecer el contenido HTML de la fila con los datos del producto
-                    row.innerHTML = '<td>' + producto.NombreProducto + '</td>' +
-                                    '<td>' + producto.DescripcionProducto + '</td>' +
-                                    '<td>' + producto.NombreCategoria + '</td>' +
-                                    '<td>' + producto.PrecioProducto + '</td>' +
-                                    '<td>' + '<img src = ' + producto.ImagenProducto +'>'  + '</td>'
-                    // Agregar la fila a la lista de productos
-                    productosList.appendChild(row);
-
+                    // Crear una nueva tarjeta
+                    var card = document.createElement('div');
+                    card.classList.add('card');
+                    card.style.width = '18rem';
+                    // Establecer el contenido HTML de la tarjeta con los datos de la película
+                    card.innerHTML = '<img src="' + (producto.ImagenProducto || 'https://via.placeholder.com/150') + '" class="card-img-top" alt="' + producto.NombreProducto + '">' +
+                                     '<div class="card-body">' +
+                                     '<h5 class="card-title">' + producto.NombreProducto + '</h5>' +
+                                     '<p class="card-text">' + producto.DescripcionProducto + '</p>' +
+                                     '<p><strong>Categoría:</strong> ' + producto.NombreCategoria + '</p>' +
+                                     '<p><strong>Precio:</strong> $' + producto.PrecioProducto + '</p>' +
+                                     '<button class="btn btn-success" onclick="agregarAlCarrito()">Agregar al Carrito</button>' +
+                                     '</div>';
+                    // Agregar la tarjeta a la lista de películas
+                    productosList.appendChild(card);
                 });
             });
         };
     </script>
-
 </body>
 </html>
