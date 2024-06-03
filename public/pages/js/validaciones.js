@@ -78,14 +78,14 @@ function validar() {
         return false;
     }
 
-      // Validar Nombre Película (entre 5 y 100 caracteres alfanuméricos)
-  var expCorreo = /^*@{1}[gmail.com][GMAIL.COM]$/;
-  var Correo = document.getElementById('email').value;
-  if (!expCorreo.test(Correo)) {
-      alert('El nombre del producto debe tener entre 5 y 100 caracteres alfanuméricos.');
-      document.getElementById('NombreProducto').focus();
-      return false;
-  }
+    // Validar Correo Electrónico (formato básico de email)
+    var expCorreo = /^[a-zA-Z0-9._%+-]+@gmail.com$/i;
+    var Correo = document.getElementById('CorreoUsuario').value;
+    if (!expCorreo.test(Correo)) {
+        alert('El correo electrónico debe ser una dirección válida de Gmail.');
+        document.getElementById('CorreoUsuario').focus();
+        return false;
+    }
 
   var expValidarCon = /^[A-Za-z0-9\s]{5,100}$/;
   if (!expValidarCon.test(Contraseña)) {
