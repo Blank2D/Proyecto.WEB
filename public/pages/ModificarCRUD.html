@@ -27,7 +27,7 @@
 
     
     <h2>Modificar Producto</h2> <!-- Encabezado principal de la página -->
-    <form id="modificar-form" action="/modificar_producto" method="POST"> <!-- Formulario para modificar una película, que envía los datos mediante el método POST a la ruta /modificar_pelicula -->
+    <form id="modificar-form" action="/modificar_producto" method="POST" onsubmit="return validar();"> <!-- Formulario para modificar una película, que envía los datos mediante el método POST a la ruta /modificar_pelicula -->
             <input type="hidden" id="IdProducto" name="IdProducto"> <!-- Campo oculto para almacenar el ID de la película -->
         <div>
             <label for="nombre">Nombre:</label> <!-- Etiqueta para el campo de nombre -->

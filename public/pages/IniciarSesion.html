@@ -29,7 +29,7 @@
 
     <section class="login-form">
         <h2>Iniciar Sesión</h2>
-        <form id="iniciar_sesion" action="/iniciar_sesion" method="post">
+        <form id="iniciar_sesion" action="/iniciar_sesion" method="post" onsubmit="return validar();">
             <label for="username">Nombre de usuario</label>
             <input type="text" id="username" name="username" required>
             <br><br>

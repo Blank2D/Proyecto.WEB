@@ -29,7 +29,7 @@
 
     <section class="login-form">
         <h2>Registrar usuario</h2>
-        <form action="/guardar_usuario" method="post">
+        <form action="/guardar_usuario" method="post" onsubmit="return validar();">
             <div>
                 <label for="NombreUsuario">Nombre de usuario:</label>
                 <input type="text" id="NombreUsuario" name="NombreUsuario" required>
