@@ -67,8 +67,7 @@
                     card.classList.add('card');
                     card.style.width = '18rem';
                     // Establecer el contenido HTML de la tarjeta con los datos de la película
-                    card.innerHTML = '<img src="' + (producto.ImagenProducto || 'https://via.placeholder.com/150') + '" class="card-img-top" alt="' + producto.NombreProducto + '">' +
-                                     '<div class="card-body">' +
+                    card.innerHTML = '<img src=' + producto.ImagenProducto + '>' +
                                      '<h5 class="card-title">' + producto.NombreProducto + '</h5>' +
                                      '<p class="card-text">' + producto.DescripcionProducto + '</p>' +
                                      '<p><strong>Categoría:</strong> ' + producto.NombreCategoria + '</p>' +
