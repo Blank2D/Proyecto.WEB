@@ -52,36 +52,30 @@ app.post('/guardar_producto',(req, res) => {
     const { NombreProducto, DescripcionProducto, NombreCategoria, PrecioProducto, StockProducto } = req.body;
     
     
+        try{
+            const imagenProductoLocal = req.files.ImagenProducto;
+            const nombreimagen = req.files.ImagenProducto.name;
 
+            rutaImagenesLocal = __dirname + '/public/pages/imagenesAlmacenadas/' + nombreimagen;
 
+            imagenProductoLocal.mv(rutaImagenesLocal, (err) => {})
 
-        if(req.body.ImagenProducto == null){
-            throw 'a';
-            }
-
-            try{
-                const imagenProductoLocal = req.files.ImagenProducto;
-                const nombreimagen = req.files.ImagenProducto.name;
-
-                rutaImagenesLocal = __dirname + '/public/pages/imagenesAlmacenadas/' + nombreimagen;
-
-                imagenProductoLocal.mv(rutaImagenesLocal, (err) => {})
-
-                var rutaImagenes = 'imagenesAlmacenadas/' + nombreimagen;
-            }
+            var rutaImagenes = 'imagenesAlmacenadas/' + nombreimagen;
             
-            catch(err){
-                rutaImagenes = '/pages(images/sillycat.jpg'
-            }
-        
-            finally{
+        }
+
+        catch{
+            rutaImagenes = '/images/sillycat.jpg';
+        }
+
+        finally{
                 const sql = 'INSERT INTO Productos (NombreProducto, DescripcionProducto, NombreCategoria, PrecioProducto, StockProducto, Imagenproducto) VALUES ( ?, ?, ?, ?, ?, ?)';
                 connection.query(sql, [NombreProducto, DescripcionProducto, NombreCategoria, PrecioProducto, StockProducto, rutaImagenes], (err, result) => {
                     if (err) {};
                     console.log('Producto insertado correctamente.');
                 });
                 res.redirect('/AgregarCRUD.html');
-            }
+        }
             
 });
 
