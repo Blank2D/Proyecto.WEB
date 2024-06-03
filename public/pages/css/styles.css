@@ -102,3 +102,70 @@ h2 {
     display: block;
     margin: 0 auto; /* Centrar el mapa */
 }
+
+/* Estilos específicos para la sección de login */
+.login-form {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 30px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #f8f9fa;
+}
+
+.login-form h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 2rem;
+    color: #333;
+}
+
+.login-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.login-form input[type="text"],
+.login-form input[type="password"],
+.login-form input[type="email"],
+.login-form select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.login-form button[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #343a40;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.login-form button[type="submit"]:hover {
+    background-color: #495057;
+}
+
+.extra-buttons {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.extra-buttons .register-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #17a2b8;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.extra-buttons .register-btn:hover {
+    background-color: #138496;
+}
