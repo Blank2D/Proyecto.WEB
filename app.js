@@ -165,7 +165,6 @@ app.post('/guardar_usuario',(req, res) => {
     connection.query(sql, [NombreUsuario, CorreoUsuario, ContrasenaUsuario, ValidacionContrasena, NombreRol], (err, result) => {
         if (err) throw err;
         console.log('Usuario insertado correctamente.');
-        res.redirect('/');
     });
 });
 
