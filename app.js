@@ -182,8 +182,6 @@ app.post('/iniciar_sesion', (req, res) => {
             } else {
                 res.send('Rol de usuario no reconocido.');
             }
-        } else {
-            res.send('Nombre de usuario o contraseña incorrectos.');
         }
     });
 });
