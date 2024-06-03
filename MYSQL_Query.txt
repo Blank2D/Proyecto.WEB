@@ -39,6 +39,3 @@ CREATE TABLE Venta (
     FOREIGN KEY (IdUsuario) REFERENCES Usuarios(IdUsuario)
 );
 
--- Insertar datos en la tabla Usuarios
-INSERT INTO Usuarios (NombreUsuario, CorreoUsuario, ContrasenaUsuario, ValidacionContrasena, Activo,NombreRol) VALUES
-('Cristobal', 'cristobal@gmail.com', 'cristobal1234', 'cristobal1234', 1 ,'Administrador');

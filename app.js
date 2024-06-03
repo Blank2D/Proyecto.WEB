@@ -21,7 +21,7 @@ const port = 3000;
 const connection = mysql.createConnection({
     host: '127.0.0.1',
     user: 'root',
-    password: 'Miperrito1!',
+    password: '1234',
     database: 'ventasdb'
 });
 
@@ -46,6 +46,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 //Configuro para que la aplicacon inicie desde el director o carpeta pagina principal
 app.use(express.static(path.join(__dirname, 'public/pages')));
+
+
+
 
 //Recibo los valores y los envio a la tabla
 app.post('/guardar_producto',(req, res) => {
