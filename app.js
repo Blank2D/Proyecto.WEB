@@ -177,7 +177,7 @@ app.post('/iniciar_sesion', (req, res) => {
             const user = results[0];
             if (user.NombreRol === 'Administrador') {
                 res.redirect('/ListarCRUD.html');
-            } else if (user.NombreRol === 'Cliente') {
+            } else if (user.NombreRol === 'Usuario') {
                 res.send(`<script>alert('Bienvenido usuario: ${user.NombreUsuario}'); window.location.href = '/Index.html';</script>`);
             } else {
                 res.send('Rol de usuario no reconocido.');
