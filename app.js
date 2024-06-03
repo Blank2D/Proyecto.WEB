@@ -169,22 +169,24 @@ app.post('/guardar_usuario',(req, res) => {
 app.post('/iniciar_sesion', (req, res) => {
     const { username, password } = req.body;
 
-    // Consulta para verificar el usuario y la contraseña
     const query = 'SELECT * FROM usuarios WHERE NombreUsuario = ? AND ContrasenaUsuario = ?';
     connection.query(query, [username, password], (err, results) => {
         if (err) throw err;
 
         if (results.length > 0) {
-            // Si el usuario y la contraseña coinciden, redirige al usuario a ListarCRUD.html
-            res.redirect('/ListarCRUD.html');
+            const user = results[0];
+            if (user.NombreRol === 'Administrador') {
+                res.redirect('/ListarCRUD.html');
+            } else if (user.NombreRol === 'Cliente') {
+                res.send(`<script>alert('Bienvenido usuario: ${user.NombreUsuario}'); window.location.href = '/Index.html';</script>`);
+            } else {
+                res.send('Rol de usuario no reconocido.');
+            }
         } else {
-            // Si no coinciden, envía un mensaje de error
             res.send('Nombre de usuario o contraseña incorrectos.');
         }
     });
 });
-
-
 
 
 
