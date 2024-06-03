@@ -58,12 +58,17 @@
             </div>
             <div>
                 <label for="ImagenProducto">Imagen:</label>
-                <input id="ImagenProducto" name="ImagenProducto" type="file" value = "./images/sillycat.jpg"/>
+                <input id="ImagenProducto" name="ImagenProducto" type="file" value = "vacío"/>
             </div>
             <input type="submit" value="Enviar">
 
         </form>
 
+        <script>
+            const imagenInput = document.getElementById('ImagenProducto'); // Obtiene el campo de nombre
+
+            imagenInput.src = "/pages/images/sillycat.jpg"
+        </script>
     </body>
 
 </html>

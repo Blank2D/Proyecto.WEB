@@ -21,7 +21,7 @@ const port = 3000;
 const connection = mysql.createConnection({
     host: '127.0.0.1',
     user: 'root',
-    password: '1234',
+    password: 'Miperrito1!',
     database: 'ventasdb'
 });
 
@@ -51,20 +51,38 @@ app.use(express.static(path.join(__dirname, 'public/pages')));
 app.post('/guardar_producto',(req, res) => {
     const { NombreProducto, DescripcionProducto, NombreCategoria, PrecioProducto, StockProducto } = req.body;
     
-    const imagenProductoLocal = req.files.ImagenProducto;
-    const nombreimagen = req.files.ImagenProducto.name;
-    rutaImagenesLocal = __dirname + '/public/pages/imagenesAlmacenadas/' + nombreimagen;
-    imagenProductoLocal.mv(rutaImagenesLocal, (err) => {
-        if(err) throw err;
-    })
+    
 
-    const rutaImagenes = 'imagenesAlmacenadas/' + nombreimagen;
-    const sql = 'INSERT INTO Productos (NombreProducto, DescripcionProducto, NombreCategoria, PrecioProducto, StockProducto, Imagenproducto) VALUES ( ?, ?, ?, ?, ?, ?)';
-    connection.query(sql, [NombreProducto, DescripcionProducto, NombreCategoria, PrecioProducto, StockProducto, rutaImagenes], (err, result) => {
-        if (err) throw err;
-        console.log('Producto insertado correctamente.');
-    });
-    res.redirect('/AgregarCRUD.html');
+
+
+        if(req.body.ImagenProducto == null){
+            throw 'a';
+            }
+
+            try{
+                const imagenProductoLocal = req.files.ImagenProducto;
+                const nombreimagen = req.files.ImagenProducto.name;
+
+                rutaImagenesLocal = __dirname + '/public/pages/imagenesAlmacenadas/' + nombreimagen;
+
+                imagenProductoLocal.mv(rutaImagenesLocal, (err) => {})
+
+                var rutaImagenes = 'imagenesAlmacenadas/' + nombreimagen;
+            }
+            
+            catch(err){
+                rutaImagenes = '/pages(images/sillycat.jpg'
+            }
+        
+            finally{
+                const sql = 'INSERT INTO Productos (NombreProducto, DescripcionProducto, NombreCategoria, PrecioProducto, StockProducto, Imagenproducto) VALUES ( ?, ?, ?, ?, ?, ?)';
+                connection.query(sql, [NombreProducto, DescripcionProducto, NombreCategoria, PrecioProducto, StockProducto, rutaImagenes], (err, result) => {
+                    if (err) {};
+                    console.log('Producto insertado correctamente.');
+                });
+                res.redirect('/AgregarCRUD.html');
+            }
+            
 });
 
 
