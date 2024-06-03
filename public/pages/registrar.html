@@ -19,7 +19,7 @@
         <nav>
             <ul>
                 <li><a href="index.html">Inicio</a></li>
-                <li><a href="catalogo.html">Catálogo</a></li>
+                <li><a href="catalogo.html">Catálogo</a></li>n
                 <li><a href="IniciarSesion.html">Iniciar Sesión</a></li>
             </ul>
         </nav>
@@ -30,25 +30,25 @@
         <form action="/guardar_usuario" method="post" onsubmit="return validar();">
             <div>
                 <label for="NombreUsuario">Nombre de usuario:</label>
-                <input type="text" id="NombreUsuario" name="NombreUsuario" required>
+                <input type="text" id="NombreUsuario" name="NombreUsuario" >
             </div>
             <br>
             <div>
                 <label for="CorreoUsuario">Correo usuario:</label>
-                <input type="email" id="CorreoUsuario" name="CorreoUsuario" required>
+                <input type="email" id="CorreoUsuario" name="CorreoUsuario" >
             </div>
             <br>
             <div>
                 <label for="ContrasenaUsuario">Contraseña:</label>
-                <input type="password" id="ContrasenaUsuario" name="ContrasenaUsuario" required>
+                <input type="password" id="ContrasenaUsuario" name="ContrasenaUsuario" >
             </div>
             <div>
                 <label for="ValidacionContrasena">Validar Contraseña:</label>
-                <input type="password" id="ValidacionContrasena" name="ValidacionContrasena" required>
+                <input type="password" id="ValidacionContrasena" name="ValidacionContrasena" >
             </div>
             <div>
                 <label for="NombreRol">Rol:</label>
-                <select id="NombreRol" name="NombreRol" required>
+                <select id="NombreRol" name="NombreRol" >
                     <option value="" disabled selected>Selecciona una categoría</option>
                     <option value="Administrador">Administrador</option>
                     <option value="Usuario">Usuario</option>
