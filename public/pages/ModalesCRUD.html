@@ -1,0 +1,408 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio</title>
+    <link rel="stylesheet" href="../css/crud.css">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+</head>
+
+<body>
+    <div class="div_logo_nombre_tienda">
+        <img src="images/Logo.png" alt="Logo de La Tiendita" width="110" height="110">
+        <h1>La Tiendita Administración</h1>
+    </div>
+
+
+    <nav>
+        <ul>
+            <li><a href="index.html">Inicio (se cerrará la sesión)</a></li>
+        </ul>
+    </nav>
+
+    <br><br>
+    <div class="d-grid gap-2 col-6 mx-auto">
+        <button type="button" class="btn btn-primary btn-lg btn-block" data-bs-toggle='modal'
+            data-bs-target='#agregarModal'>Agregar Un Nuevo Producto</button>
+    </div>
+
+
+    <div class="container mt-5">
+        <h1>Lista de Productos</h1>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID Producto</th>
+                    <th>Nombre</th>
+                    <th>Descripción</th>
+                    <th>Categoría</th>
+                    <th>Precio</th>
+                    <th>Stock</th>
+                    <th>Acciones</th> <!-- Nueva columna para las acciones -->
+                </tr>
+            </thead>
+            <tbody id="productos-table-body">
+                <!-- Filas de productos se insertarán aquí -->
+            </tbody>
+        </table>
+    </div>
+
+
+    <!-- INICIO MODALES INICIO MODALES INICIO MODALES INICIO MODALES -->
+
+    <!-- Modal para Agregar Producto -->
+    <div class="modal fade" id="agregarModal" tabindex="-1" aria-labelledby="agregarModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="detallesModalLabel">Producto a Agregar: </h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="agregarProductoForm" action="/guardar_productoModal" method="post"
+                        enctype="multipart/form-data">
+
+                        <div>
+                            <label for="NombreProducto">Nombre Producto:</label>
+                            <input type="text" id="NombreProducto" name="NombreProducto">
+                        </div>
+                        <div>
+                            <label for="DescripcionProducto">Descripcion:</label>
+                            <input type="text" id="DescripcionProducto" name="DescripcionProducto">
+                        </div>
+                        <div>
+                            <label for="PrecioProducto">Precio:</label>
+                            <input type="number" id="PrecioProducto" name="PrecioProducto">
+                        </div>
+                        <div>
+                            <label for="NombreCategoria">Categoría:</label>
+                            <select id="NombreCategoria" name="NombreCategoria">
+                                <option value="" disabled selected>Selecciona una categoría</option>
+                                <option value="cosplay">Cosplay</option>
+                                <option value="figura">Figura</option>
+                                <option value="hogar">Hogar</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="StockProducto">Stock:</label>
+                            <input type="number" id="StockProducto" name="StockProducto">
+                        </div>
+                        <div>
+                            <label for="ImagenProducto">Imagen:</label>
+                            <input id="ImagenProducto" name="ImagenProducto" type="file" value="vacío" />
+                        </div>
+                        <input type="submit" value="Agregar Nuevo Producto">
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal para Modificar Producto -->
+    <div class="modal fade" id="modificarModal" tabindex="-1" aria-labelledby="modificarModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="modificarModalLabel">Modificar Producto</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="modificarProductoForm" enctype="multipart/form-data">
+                        <input type="hidden" id="ProductoIDMod" name="ProductoID">
+                        <div>
+                            <label for="NombreProductoMod">Nombre Producto:</label>
+                            <input type="text" id="NombreProductoMod" name="NombreProducto">
+                        </div>
+                        <div>
+                            <label for="DescripcionProductoMod">Descripción:</label>
+                            <input type="text" id="DescripcionProductoMod" name="DescripcionProducto">
+                        </div>
+                        <div>
+                            <label for="PrecioProductoMod">Precio:</label>
+                            <input type="number" id="PrecioProductoMod" name="PrecioProducto">
+                        </div>
+                        <div>
+                            <label for="NombreCategoriaMod">Categoría:</label>
+                            <select id="NombreCategoriaMod" name="NombreCategoria">
+                                <option value="" disabled selected>Selecciona una categoría</option>
+                                <option value="cosplay">Cosplay</option>
+                                <option value="figura">Figura</option>
+                                <option value="hogar">Hogar</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="StockProductoMod">Stock:</label>
+                            <input type="number" id="StockProductoMod" name="StockProducto">
+                        </div>
+                        <div>
+                            <label for="ImagenProductoMod">Imagen:</label>
+                            <input id="ImagenProductoMod" name="ImagenProducto" type="file" />
+                        </div>
+                        <input type="submit" value="Modificar Producto">
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para ver detalles -->
+    <div class="modal fade" id="detallesModal" tabindex="-1" aria-labelledby="detallesModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="detallesModalLabel">Detalles del Producto</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p id="detallesProducto"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para confirmar eliminación -->
+    <div class="modal fade" id="eliminarModal" tabindex="-1" aria-labelledby="eliminarModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="eliminarModalLabel">Confirmar Eliminación</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>¿Estás seguro de que deseas eliminar este Producto?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-danger" id="confirmarEliminarBtn">Eliminar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FIN MODALES FIN MODALES FIN MODALES FIN MODALES FIN MODALES -->
+
+    <!-- IMPORT SCRIPTS BOOTSTRAP -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <!-- FIN  IMPORT SCRIPTS BOOTSTRAP -->
+
+
+    <!-- INICIO SCRIPTS MODALES INICIO SCRIPTS MODALES INICIO SCRIPTS MODALES -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            fetch("/productosModal")
+                .then(function (response) {
+                    return response.json();
+                })
+                .then(function (data) {
+                    var tableBody = document.getElementById("productos-table-body");
+                    data.forEach(function (producto) {
+                        var row = document.createElement("tr");
+                        row.innerHTML =
+                            "<td>" + producto.IdProducto + "</td>" +
+                            "<td>" + producto.NombreProducto + "</td>" +
+                            "<td>" + producto.DescripcionProducto + "</td>" +
+                            "<td>" + producto.NombreCategoria + "</td>" +
+                            "<td>" + producto.PrecioProducto + "</td>" +
+                            "<td>" + producto.StockProducto + "</td>" +
+
+                            "<td>" +
+                            "<button class='btn btn-success btn me-md-2' onclick='verDetalles(" + producto.IdProducto + ")' data-bs-toggle='modal' data-bs-target='#detallesModal'>Ver detalles</button>" +
+                            "<button class='btn btn-danger btn me-md-2' onclick='prepararEliminar(" + producto.IdProducto + ")' data-bs-toggle='modal' data-bs-target='#eliminarModal'>Eliminar</button>" +
+                            "<button class='btn btn-warning btn me-md-2' onclick='prepararModificar(" + producto.IdProducto + ")' data-bs-toggle='modal' data-bs-target='#ModificarModal'>Modificar</button>" +
+
+                            "</td>";
+                        tableBody.appendChild(row);
+                    });
+                })
+                .catch(function (error) {
+                    console.error("Error al obtener los Productos:", error);
+                });
+        });
+
+        function verDetalles(id) {
+            // Realiza una solicitud fetch para obtener los detalles de un usuario por su ID
+            fetch("/productos/" + id)
+                .then(function (response) {
+                    // Convierte la respuesta a formato JSON
+                    return response.json();
+                })
+                .then(function (datos) {
+                    // Actualiza el contenido del elemento con ID "detallesProducto" con los detalles del usuario
+                    document.getElementById("detallesProducto").innerHTML =
+                        "ID Producto: " + datos.IdProducto + "<br>" +
+                        "Nombre Producto: " + datos.NombreProducto + "<br>" +
+                        "Descripcion: " + datos.DescripcionProducto + "<br>" +
+                        "Categoria: " + datos.NombreCategoria + "<br>" +
+                        "Precio: $ " + datos.PrecioProducto + "<br>" +
+                        "Cantidad en Stock: " + datos.StockProducto;
+                })
+                .catch(function (error) {
+                    // Maneja cualquier error que ocurra durante la solicitud fetch
+                    console.error("Error al obtener los detalles del Producto:", error);
+                });
+        }
+
+        // Variable global para almacenar el ID del usuario a eliminar
+        var productoAEliminar = null;
+
+        function prepararEliminar(id) {
+            // Asigna el ID del usuario a eliminar a la variable global
+            productoAEliminar = id;
+        }
+
+        function prepararModificar(id) {
+            // hacemos un fetch para obtener los datos del produtco en especifico
+            fetch("/productos/" + id)
+                .then(function (response) {
+                    return response.json();
+                })
+                .then(function (producto) {
+                    // Llenamos elf ormulario de modificar con los datos del producto
+                    document.getElementById('ProductoIDMod').value = producto.IdProducto;
+                    document.getElementById('NombreProductoMod').value = producto.NombreProducto;
+                    document.getElementById('DescripcionProductoMod').value = producto.DescripcionProducto;
+                    document.getElementById('PrecioProductoMod').value = producto.PrecioProducto;
+                    document.getElementById('NombreCategoriaMod').value = producto.NombreCategoria;
+                    document.getElementById('StockProductoMod').value = producto.StockProducto;
+                })
+                .catch(function (error) {
+                    console.error("Error al obtener los detalles del producto:", error);
+                });
+        }
+
+        // Añade un listener al botón con ID "confirmarEliminarBtn" para manejar el evento click
+        document.getElementById("confirmarEliminarBtn").addEventListener("click", function () {
+            // Verifica que usuarioAEliminar no sea null
+            if (productoAEliminar !== null) {
+                // Realiza una solicitud fetch para eliminar el usuario con el ID almacenado en productoAEliminar
+                fetch("/eliminar_producto/" + productoAEliminar, {
+                    method: "DELETE" // Especifica el método HTTP DELETE para la solicitud
+                })
+                    .then(function (response) {
+                        // Verifica si la respuesta es exitosa (código de estado 200-299)
+                        if (response.ok) {
+                            alert("Producto eliminado exitosamente");
+                            location.reload(); // Recarga la página para actualizar la lista de usuarios
+                        } else {
+                            alert("Error al eliminar el Producto");
+                        }
+                    })
+                    .catch(function (error) {
+                        // Maneja cualquier error que ocurra durante la solicitud fetch
+                        console.error("Error al eliminar el Producto:", error);
+                    });
+            }
+        });
+
+
+        document.getElementById('agregarProductoForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            var form = event.target;
+
+            // Creamos un objeto FormData con los datos del formulario para agregar producto
+            var formData = new FormData(form);
+
+            // Enviamos  los datos del formulario usando fetch
+            fetch('/guardar_productoModal', {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('Producto agregado correctamente');
+                        location.reload();
+                    } else {
+                        alert('Error al AGREGAR el Producto');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Error al AGREGAR el Producto');
+                });
+        });
+    </script>
+
+
+    <script>
+
+        // Función para eliminar un producto
+        function eliminarProducto(IdProducto) {
+            fetch('/eliminar_producto/' + IdProducto, {
+                method: 'DELETE'
+            })
+                .then(function (response) {
+                    if (response.ok) {
+                        console.log('Producto eliminado correctamente.');
+                        // Actualizar la tabla después de eliminar el producto
+                        window.location.reload();
+                    } else {
+                        console.error('Error al eliminar producto.');
+                    }
+                })
+                .catch(function (error) {
+                    console.error('Error en la solicitud:', error);
+                });
+        }
+
+    </script>
+
+    <script>
+        // Función para modificar un producto
+        document.getElementById('modificarProductoForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            var form = event.target;
+
+            // Creamos un objeto FormData con los datos del formulario
+            var formData = new FormData(form);
+
+            // Enviamos los datos con el fetch
+            fetch('/modificar_productoModal', {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('Producto modificado correctamente.');
+                        location.reload();
+                    } else {
+                        alert('Hubo un problema al modificar el producto.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Hubo un problema al modificar el producto.');
+                });
+        });
+    </script>
+
+
+
+    <script>
+        // SCRIPT para conseguir la Imagen Anexada
+        const imagenInput = document.getElementById('ImagenProducto'); // Obtiene el campo de nombre
+
+        imagenInput.src = "/pages/images/sillycat.jpg"
+    </script>
+
+
+</body>
+
+</html>

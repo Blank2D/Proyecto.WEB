@@ -21,7 +21,7 @@ const port = 3000;
 const connection = mysql.createConnection({
     host: '127.0.0.1',
     user: 'root',
-    password: 'Miperrito1!',
+    password: '1234',
     database: 'ventasdb'
 });
 
@@ -94,6 +94,129 @@ app.get('/productos', (req, res) => {
     });
 });
 
+// INICIO METODOS CRUD MODAL INICIO METODOS CRUD MODAL INICIO METODOS CRUD MODAL INICIO METODOS CRUD MODAL //
+// ObtenerProductos en formato JSON
+app.get('/productosModal', (req, res) => {
+    const query = 'SELECT * FROM Productos';
+
+    connection.query(query, (err, results) => {
+        if (err) {
+            console.error('Error al obtener los Productos:', err);
+            res.send('Error al obtener los Productos');
+        } else {
+            res.json(results);
+        }
+    });
+});
+// FINAL ObtenerProductos en formato JSON
+
+// Nueva ruta para obtener los detalles de un Producto
+app.get('/productos/:id', (req, res) => {
+    const { id } = req.params;
+
+    const query = 'SELECT * FROM Productos where IdProducto = ?';
+    connection.query(query, [id], (err, result) => {
+        if (err) {
+            console.error('Error al obtener los detalles del Producto:', err);
+            res.status(500).send('Error al obtener los detalles del Producto');
+        } else {
+            res.json(result[0]);
+        }
+    });
+});
+// Final Nueva ruta para obtener los detalles de un Producto
+
+// Nueva ruta para eliminar un Producto
+app.delete('/eliminar_producto/:id', (req, res) => {
+    const { id } = req.params;
+
+    const query = 'DELETE FROM Productos WHERE IdProducto = ?';
+    connection.query(query, [id], (err, result) => {
+        if (err) {
+            console.error('Error al eliminar el Producto:', err);
+            res.status(500).send('Error al eliminar el Producto');
+        } else {
+            res.status(200).send('Producto eliminado exitosamente');
+        }
+    });
+});
+// Final ruta para eliminar un Producto
+
+// inicio metodo agregar producto modal
+app.post('/guardar_productoModal', (req, res) => {
+    const { NombreProducto, DescripcionProducto, NombreCategoria, PrecioProducto, StockProducto } = req.body;
+
+    try {
+        const imagenProductoLocal = req.files.ImagenProducto;
+        const nombreimagen = req.files.ImagenProducto.name;
+
+        rutaImagenesLocal = __dirname + '/public/pages/imagenesAlmacenadas/' + nombreimagen;
+
+        imagenProductoLocal.mv(rutaImagenesLocal, (err) => {});
+
+        var rutaImagenes = 'imagenesAlmacenadas/' + nombreimagen;
+    } catch {
+        rutaImagenes = '/images/sillycat.jpg';
+    } finally {
+        const sql = 'INSERT INTO Productos (NombreProducto, DescripcionProducto, NombreCategoria, PrecioProducto, StockProducto, Imagenproducto) VALUES (?, ?, ?, ?, ?, ?)';
+        connection.query(sql, [NombreProducto, DescripcionProducto, NombreCategoria, PrecioProducto, StockProducto, rutaImagenes], (err, result) => {
+            if (err) {
+                console.error(err);
+                return res.json({ success: false });
+            }
+            console.log('Producto insertado correctamente.');
+            return res.json({ success: true });
+        });
+    }
+});
+// Final metodo agregar producto modal
+
+
+// inicio metodo Modificar producto modal
+
+app.post('/modificar_productoModal', (req, res) => {
+    const { ProductoID, NombreProducto, DescripcionProducto, NombreCategoria, PrecioProducto, StockProducto } = req.body;
+
+    let rutaImagenes;
+    try {
+        if (req.files && req.files.ImagenProducto) {
+            const imagenProductoLocal = req.files.ImagenProducto;
+            const nombreimagen = req.files.ImagenProducto.name;
+
+            rutaImagenesLocal = __dirname + '/public/pages/imagenesAlmacenadas/' + nombreimagen;
+
+            imagenProductoLocal.mv(rutaImagenesLocal, (err) => {});
+
+            rutaImagenes = 'imagenesAlmacenadas/' + nombreimagen;
+        }
+    } catch {
+        rutaImagenes = null;
+    } finally {
+        let sql = 'UPDATE Productos SET NombreProducto = ?, DescripcionProducto = ?, NombreCategoria = ?, PrecioProducto = ?, StockProducto = ?';
+        let params = [NombreProducto, DescripcionProducto, NombreCategoria, PrecioProducto, StockProducto];
+
+        if (rutaImagenes) {
+            sql += ', Imagenproducto = ?';
+            params.push(rutaImagenes);
+        }
+
+        sql += ' WHERE IdProducto = ?';
+        params.push(ProductoID);
+
+        connection.query(sql, params, (err, result) => {
+            if (err) {
+                console.error(err);
+                return res.json({ success: false });
+            }
+            console.log('Producto modificado correctamente.');
+            return res.json({ success: true });
+        });
+    }
+});
+
+// inicio Final Modificar producto modal
+
+// FIN METODOS CRUD MODAL FIN METODOS CRUD MODAL FIN METODOS CRUD MODAL FIN METODOS CRUD MODAL //
 
 //METODO PARA TRAER SOLO 4 Productos
 app.get('/productos_inicio', (req, res) => {
@@ -165,6 +288,8 @@ app.post('/guardar_usuario',(req, res) => {
     connection.query(sql, [NombreUsuario, CorreoUsuario, ContrasenaUsuario, ValidacionContrasena, NombreRol], (err, result) => {
         if (err) throw err;
         console.log('Usuario insertado correctamente.');
+        res.redirect('/IniciarSesion.html');
+
     });
 });
 
@@ -178,7 +303,7 @@ app.post('/iniciar_sesion', (req, res) => {
         if (results.length > 0) {
             const user = results[0];
             if (user.NombreRol === 'Administrador') {
-                res.redirect('/ListarCRUD.html');
+                res.redirect('/ModalesCRUD.html');
             } else if (user.NombreRol === 'Usuario') {
                 res.send(`<script>alert('Bienvenido usuario: ${user.NombreUsuario}'); window.location.href = '/Index.html';</script>`);
             } else {
